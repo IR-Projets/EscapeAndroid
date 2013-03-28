@@ -45,8 +45,6 @@ public class GraphicsView extends View {
 		paint.setColor(Color.argb(255, 0, 0, 0));
 		paint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
 		matrix = new Matrix();
-		
-		game = new Game();
 	}
 
 	
@@ -55,9 +53,10 @@ public class GraphicsView extends View {
 	{
 		super.onDraw(canvas);
 		
-		game.run(canvas);
-		
-		invalidate();
+		if(game != null){
+			game.run(canvas);
+			invalidate();	
+		}
 	}
 
 	@Override
@@ -66,16 +65,27 @@ public class GraphicsView extends View {
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);	
 		Variables.SCREEN_WIDTH = MeasureSpec.getSize(widthMeasureSpec);
 		Variables.SCREEN_HEIGHT = MeasureSpec.getSize(heightMeasureSpec);
+		
+		if(game == null){
+			try {
+				game = new Game();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(0);
+			}
+			invalidate();
+		}
 	}
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event) 
-	{				
-		
+	{	
 		if(toast==null)
 			toast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
 		toast.setText("x: " + event.getX() + ", y: " + event.getY());
 		toast.show();		
+		
+		game.event(event);
 		
 		//invalidate();
 		

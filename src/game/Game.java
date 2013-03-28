@@ -5,15 +5,14 @@ import hud.Button.ButtonType;
 
 import java.io.IOException;
 
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 
 import listeners.EnvironnementListener;
 import factories.EnvironnementFactory;
 import factories.EnvironnementFactory.Level;
-import fr.umlv.zen2.MotionEvent;
 
 
 /**

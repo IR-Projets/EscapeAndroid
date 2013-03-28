@@ -188,6 +188,8 @@ public class Player extends Ship {
 		loopingImages[17] = Ressources.getImage(R.drawable.joueur_loop18);
 		loopingImages[18] = Ressources.getImage(R.drawable.joueur_loop19);
 		loopingImages[19] = Ressources.getImage(R.drawable.joueur_loop20);
+		loopingImages[20] = Ressources.getImage(R.drawable.joueur_loop21);
+		loopingImages[21] = Ressources.getImage(R.drawable.joueur_loop22);
 		
 		touchedImages = new Bitmap[4];
 		touchedImages[0] = Ressources.getImage(R.drawable.joueur_red1);
@@ -297,8 +299,7 @@ public class Player extends Ship {
 				(vel.x>0 && pos.x>Variables.SCREEN_WIDTH - getImage().getWidth()))
 			vel.x=0;
 
-		if( (vel.y<0 && pos.y<getImage().getHeight()) || 
-				(vel.y>0 && pos.y>Variables.SCREEN_HEIGHT/3 + getImage().getHeight()))
+		if( (vel.y<0 && pos.y<getImage().getHeight()) || (vel.y>0 && pos.y>Variables.SCREEN_HEIGHT))
 			vel.y=0;
 
 		setVelocity(vel.x, vel.y);

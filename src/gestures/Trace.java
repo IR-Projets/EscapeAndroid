@@ -64,7 +64,8 @@ public class Trace {
 		valid = false;
 		
 		paint = new Paint(0);
-		paint.setColor(Color.argb(255, 0, 0, 0));
+		paint.setColor(Color.RED);
+		paint.setStrokeWidth(5);
 		paint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
 	}
 	
@@ -153,6 +154,11 @@ public class Trace {
 		Vec2 currentPoint = traceIte.next();
 		Vec2 lastPoint = null;
 		
+		if(isValid())
+			paint.setColor(Color.GREEN);
+		else
+			paint.setColor(Color.RED);
+			
 		while(traceIte.hasNext()){
 			lastPoint = currentPoint;
 			currentPoint = traceIte.next();

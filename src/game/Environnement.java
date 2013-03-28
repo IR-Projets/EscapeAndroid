@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
 import listeners.EntitiesListener;
 import listeners.CollisionListener.EntityType;
@@ -14,7 +15,6 @@ import effects.Effects;
 import entities.Entities;
 import entities.ships.Player;
 import entities.ships.enemies.EnemiesLoader;
-import fr.umlv.zen2.MotionEvent;
 import gestures.Gesture;
 import hud.Hud;
 
@@ -169,9 +169,9 @@ public class Environnement implements EntitiesListener {
 	public void render(Canvas canvas){
 		map.render(canvas);				//The ground (the planet)
 		entities.render(canvas);			//All the entities (player too)
-		//gesture.render(canvas);			//Gesture movements (circle)
-		//Effects.render(canvas);			//Effect (explosion, cloud, ..)
-		//Hud.get().render(canvas);			//Health, score, amo
+		gesture.render(canvas);			//Gesture movements (circle)
+		Effects.render(canvas);			//Effect (explosion, cloud, ..)
+		Hud.get().render(canvas);			//Health, score, amo
 	}
 
 	/**

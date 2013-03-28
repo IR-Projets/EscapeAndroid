@@ -5,15 +5,13 @@ import java.util.Iterator;
 import com.example.escapeandroid.R;
 
 import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.view.MotionEvent;
 
 import entities.ships.Player;
 import entities.weapons.WeaponItem;
-import fr.umlv.zen2.MotionEvent;
-import fr.umlv.zen2.MotionEvent.Kind;
 import game.Ressources;
 import game.Variables;
 /**
@@ -121,7 +119,7 @@ public class Hud {
 	public void drawLife(Canvas graphics){
 		//graphics.setColor(Variables.GREEN);
 		paint.setColor(Color.GREEN);
-		graphics.drawRect(2*hudLeft.getWidth()/7, 6*hudLeft.getHeight()/11, player.getLife(), hudLeft.getHeight()/4, paint);
+		graphics.drawRect(2*hudLeft.getWidth()/6, 6*hudLeft.getHeight()/10, 2*hudLeft.getWidth()/6 + player.getLife(), 6*hudLeft.getHeight()/10 + hudLeft.getHeight()/4, paint);
 	}
 
 	/**
@@ -188,13 +186,13 @@ public class Hud {
 	 * @return true if the event is associated with a selection of a weapon, else false.
 	 */
 	public boolean eventItemList(MotionEvent event){
-		int mouseX = event.getX(), mouseY = event.getY();
+		float mouseX = event.getX(), mouseY = event.getY();
 		int debItemX = Variables.SCREEN_WIDTH-hudRight.getWidth() + hudRight.getWidth()/7;
 		int finItemX = debItemX + cadreBor.getWidth();
 		int debItemY = 6*hudRight.getHeight()/11+cadreSup.getHeight();
 		int echelleY = cadreBor.getHeight();
 
-		if(event.getKind() != Kind.ACTION_DOWN)//Only accept on the down click of the mouse
+		if(event.getAction() != MotionEvent.ACTION_DOWN)//Only accept on the down click of the mouse
 			return false;
 
 		for(int i=1;i<player.getWeapons().size();i++)
@@ -212,7 +210,7 @@ public class Hud {
 	 */
 	public void event(MotionEvent event) {
 		int beginLeftHud = Variables.SCREEN_WIDTH-hudRight.getWidth();
-		int mouseX = event.getX(), mouseY = event.getY();
+		float mouseX = event.getX(), mouseY = event.getY();
 
 		/* Check the event of the list of weapon*/
 		if(displayItemList == true && eventItemList(event) == true)
@@ -221,7 +219,7 @@ public class Hud {
 		/*Displaying the menu*/
 		if(mouseX >= beginLeftHud && mouseX <= (beginLeftHud+hudRight.getWidth()-20))
 			if(mouseY >= 10 && mouseY <= hudRight.getHeight()-10)
-				if(event.getKind() == Kind.ACTION_DOWN)
+				if(event.getAction() == MotionEvent.ACTION_DOWN)
 					displayItemList=(displayItemList==true)?false:true;
 	}
 
@@ -230,8 +228,8 @@ public class Hud {
 	 * @param graphics the Canvas to print on
 	 */
 	public void render(Canvas graphics){
-		drawLife(graphics);
 		//graphics.drawImage(hudLeft, 0, 0, hudLeft.getWidth(), hudLeft.getHeight(), null);//Draw the right HUD
+		drawLife(graphics);
 		graphics.drawBitmap(hudLeft, 0, 0, null);
 		drawWeapons(graphics);
 		drawScore(graphics);

@@ -2,7 +2,6 @@ package gestures;
 
 import entities.ships.Player;
 import entities.ships.enemies.Action.ActionType;
-import fr.umlv.zen2.MotionEvent;
 import game.Variables;
 import gestures.filters.ArrowMovement;
 import gestures.filters.Backoff;
@@ -17,6 +16,7 @@ import java.util.List;
 import org.jbox2d.common.Vec2;
 
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 /**
  * The Gesture is the class which manage the Gesture effect, associated with the player.
  * He manage the control of all gesture launch by the player, and launch the correction action (move or shoot).
@@ -116,8 +116,8 @@ public class Gesture {
 	 * @param event - the event of the mouse.
 	 */
 	public void event(MotionEvent event){
-		switch(event.getKind()){	
-		case ACTION_UP : // End of the gesture
+		switch(event.getAction()){	
+		case MotionEvent.ACTION_UP : // End of the gesture
 			if(actionType == ActionType.MOVE){//the player want to move, so we check if he has make a good gesture, and apply the movement
 				for(Filter filter : filters)
 					if(traceStack.check(filter))
@@ -129,7 +129,7 @@ public class Gesture {
 			traceStack.finishCurrentTrace();
 			break;
 
-		case ACTION_DOWN : // Begin of the gesture
+		case MotionEvent.ACTION_DOWN : // Begin of the gesture
 			if(player.isOnSprite(new Vec2(event.getX(), event.getY())) && !player.getWeapons().isEmpty()){//the player want to shoot, so we load the weapon.
 				player.getWeapons().removeCurrentItem();
 				player.loadWeapon();
@@ -139,7 +139,7 @@ public class Gesture {
 				actionType = ActionType.MOVE;
 			break;
 
-		case ACTION_MOVE :
+		case MotionEvent.ACTION_MOVE :
 			if(traceStack.size() <= 3)//limit the number max of gesture display by 3
 				traceStack.getCurrentTrace().addPoint(new Vec2(event.getX(), event.getY()));
 			break;

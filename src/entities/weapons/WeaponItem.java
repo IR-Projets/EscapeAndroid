@@ -2,6 +2,8 @@ package entities.weapons;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import factories.WeaponFactory.WeaponType;
 import game.Variables;
 /**
@@ -46,6 +48,8 @@ public class WeaponItem {
 	 */
 	WeaponType weaponType;
 	
+	Paint paint;
+	
 	/**
 	 * The default constructor
 	 * @param weaponType - the type of the weapon associated with the item
@@ -55,6 +59,9 @@ public class WeaponItem {
 		this.weaponType = weaponType;
 		this.image=weaponType.getImage();
 		this.quantity=quantity;
+		
+		paint = new Paint(0);
+
 	}
 
 	/**
@@ -105,14 +112,23 @@ public class WeaponItem {
 	public void drawItem(Canvas canvas, int x, int y){
 		int widthItem = getImage().getWidth(), heighItem = getImage().getHeight();
 		
-		canvas.drawBitmap(getImage(), x, y, null);//display image of the item
 		//canvas.setColor(Variables.RED);
-		canvas.drawRect(x+2, y, widthItem-4, heighItem-1, null);//border of the item image
+		paint.setColor(Color.RED);
+		paint.setStrokeWidth(2);
+		paint.setStyle(Paint.Style.STROKE);  
+		canvas.drawRect(x+2, y, x + widthItem - 2, y + heighItem-1, paint);//border of the item image
+		paint.setStyle(Paint.Style.FILL);  
+
+		
+		canvas.drawBitmap(getImage(), x, y, null);//display image of the item
+
 		//canvas.setColor(Variables.ORANGE);
-		canvas.drawPosText(weaponType.toString(), new float[]{x+26, y+15}, null);
+		paint.setColor(Color.MAGENTA);
+		canvas.drawText(weaponType.toString(), x+26, y+15, paint);
 		
 		//canvas.setColor(Variables.WHITE);
-		canvas.drawPosText(String.valueOf(getQuantity()), new float[]{x+20, y+23}, null);//display the amount of the item
+		paint.setColor(Color.WHITE);
+		canvas.drawText(String.valueOf(getQuantity()), x+20, y+23, paint);//display the amount of the item
 		
 	}
 }

@@ -4,9 +4,8 @@ import com.example.escapeandroid.R;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.view.MotionEvent;
 
-import fr.umlv.zen2.MotionEvent;
-import fr.umlv.zen2.MotionEvent.Kind;
 import game.Ressources;
 
 
@@ -100,7 +99,7 @@ public abstract class Button {
 	 * @param event - the motionEvent associated.
 	 */
 	public void event(MotionEvent event) {
-		if( event.getKind()==Kind.ACTION_DOWN && 
+		if( event.getAction()==MotionEvent.ACTION_DOWN && 
 				event.getX()>posX && event.getX()<posX+image.getWidth() &&
 				event.getY()>posY && event.getY()<posY+image.getHeight() ){
 			
