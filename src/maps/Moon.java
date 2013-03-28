@@ -1,5 +1,7 @@
 package maps;
 
+import com.example.escapeandroid.R;
+
 import game.Ressources;
 
 /**
@@ -30,7 +32,7 @@ import game.Ressources;
 public class Moon extends Map{
 
 	public Moon() {
-		super(Ressources.getImage("maps/moon.png"), 0.2f);
+		super(Ressources.getImage(R.drawable.moon), 0.2f);
 		// TODO Auto-generated constructor stub
 	}
 

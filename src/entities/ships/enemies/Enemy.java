@@ -1,9 +1,10 @@
 package entities.ships.enemies;
 
-import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import org.jbox2d.common.Vec2;
+
+import android.graphics.Bitmap;
 
 import entities.Entities;
 import entities.Entity;
@@ -55,7 +56,7 @@ public class Enemy extends Ship{
 	 * @param behavior - the enemyBehavior associated with this enemy
 	 * @see EnemyBehavior
 	 */
-	public Enemy(Entities entities, EntityShape shape, BufferedImage image, int x, int y, int life, EnemyBehavior behavior){	
+	public Enemy(Entities entities, EntityShape shape, Bitmap image, int x, int y, int life, EnemyBehavior behavior){	
 		super(entities, shape, image, x, y, life);
 		this.behavior=behavior;
 		this.entities=entities;
@@ -74,7 +75,7 @@ public class Enemy extends Ship{
 	 * @param behavior - the enemyBehavior associated with this enemy
 	 * @see EnemyBehavior
 	 */
-	public Enemy(Entities entities, BufferedImage image, int x, int y, int life, EnemyBehavior behavior){	
+	public Enemy(Entities entities, Bitmap image, int x, int y, int life, EnemyBehavior behavior){	
 		this(entities, EntityShape.Square, image, x, y, life, behavior);
 	}
 

@@ -1,8 +1,14 @@
 package hud;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.Iterator;
+
+import com.example.escapeandroid.R;
+
+import android.graphics.Bitmap;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 
 import entities.ships.Player;
 import entities.weapons.WeaponItem;
@@ -55,11 +61,11 @@ public class Hud {
 	
 	
 	/**
-	 * BufferedImage for the left and right hud
+	 * Bitmap for the left and right hud
 	 */
-	private final BufferedImage hudLeft, hudRight;
-	private final BufferedImage cadreSup, cadreInf, cadreBor;
-	
+	private final Bitmap hudLeft, hudRight;
+	private final Bitmap cadreSup, cadreInf, cadreBor;
+	private final Paint paint;
 
 	/**
 	 * Boolean for know if we have to display the ItemList
@@ -77,16 +83,20 @@ public class Hud {
 	 */
 
 	public Hud(){
-		cadreSup = Ressources.getImage("hud/fontWeaponTop.png");
-		cadreInf = Ressources.getImage("hud/fontWeaponBot.png");
-		cadreBor = Ressources.getImage("hud/fontWeapon.png");
+		cadreSup = Ressources.getImage(R.drawable.font_weapon_top);
+		cadreInf = Ressources.getImage(R.drawable.font_weapon_bot);
+		cadreBor = Ressources.getImage(R.drawable.font_weapon);
 
-		hudLeft = Ressources.getImage("hud/hudLeft.png");
-		hudRight = Ressources.getImage("hud/hudRight.png");
+		hudLeft = Ressources.getImage(R.drawable.hud_left);
+		hudRight = Ressources.getImage(R.drawable.hud_right);
 
 		score = 0;
 		
 		displayItemList = false;
+		
+		paint = new Paint(0);
+		paint.setColor(Color.argb(255, 0, 0, 0));
+		//paint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
 	}
 
 	/**
@@ -106,65 +116,69 @@ public class Hud {
 	
 	/**
 	 * Draw the life of the player.
-	 * @param graphics the graphics2D to print on
+	 * @param graphics the Canvas to print on
 	 */
-	public void drawLife(Graphics2D graphics){
-		graphics.setColor(Variables.GREEN);
-		graphics.fillRect(2*hudLeft.getWidth()/7, 6*hudLeft.getHeight()/11, player.getLife(), hudLeft.getHeight()/4);
+	public void drawLife(Canvas graphics){
+		//graphics.setColor(Variables.GREEN);
+		paint.setColor(Color.GREEN);
+		graphics.drawRect(2*hudLeft.getWidth()/7, 6*hudLeft.getHeight()/11, player.getLife(), hudLeft.getHeight()/4, paint);
 	}
 
 	/**
 	 * Draw the score of the player.
-	 * @param graphics the graphics2D to print on
+	 * @param graphics the Canvas to print on
 	 */
-	public void drawScore(Graphics2D graphics){
-		graphics.setColor(Variables.WHITE);
-		graphics.drawString("SCORE", hudLeft.getWidth()/3,2*hudLeft.getHeight()/4);
-		graphics.drawString(Integer.toString(score), hudLeft.getWidth()/2+20, 2*hudLeft.getHeight()/4);
+	public void drawScore(Canvas graphics){
+		paint.setColor(Color.WHITE);
+		graphics.drawText("SCORE", hudLeft.getWidth()/3,2*hudLeft.getHeight()/4, paint);
+		graphics.drawText(Integer.toString(score), hudLeft.getWidth()/2+20, 2*hudLeft.getHeight()/4, paint);
 	}
 
 	/**
 	 * Display the item list of this object on the graphics.
 	 * The first element displayed is the second element of the list, because the first element is already displays on the hud.
 	 * Drawing a wallpaper behind item, for have a best render.
-	 * @param graphics the graphics2D to print on
+	 * @param graphics the Canvas to print on
 	 * @param x the begin of the drawing of the listItem, at position x
 	 * @param y the begin of the drawing of the listItem, at position y
 	 */
-	public void drawItemList(Graphics2D graphics, int x, int y){
+	public void drawItemList(Canvas canvas, int x, int y){
 		int echelleY = cadreSup.getHeight();
-		graphics.drawImage(cadreSup, x, y, cadreSup.getWidth(), cadreSup.getHeight(), null);
+		//graphics.drawImage(cadreSup, x, y, cadreSup.getWidth(), cadreSup.getHeight(), null);
+		canvas.drawBitmap(cadreSup, x, y, null);
 		
-		graphics.setColor(Variables.WHITE);
-		graphics.drawString("Weapon", x+22, y+20);
+		paint.setColor(Color.WHITE);
+		canvas.drawText("Weapon", x+22, y+20, paint);
 
 		Iterator<WeaponItem> it = player.getWeapons().iterator();
 		if(it.hasNext())//Don't care about the first element, because he is print on the hud
 			it.next();
 
 		while(it.hasNext()){
-			graphics.drawImage(cadreBor, x, y+echelleY, cadreBor.getWidth(), cadreBor.getHeight(), null);//the font of the item
-			it.next().drawItem(graphics, x+5, y+echelleY);// the draw of the item
+			//canvas.drawImage(cadreBor, x, y+echelleY, cadreBor.getWidth(), cadreBor.getHeight(), null);//the font of the item
+			canvas.drawBitmap(cadreBor, x, y+echelleY, null);//the font of the item
+			it.next().drawItem(canvas, x+5, y+echelleY);// the draw of the item
 			echelleY+=cadreBor.getHeight();
 		}
 
 		/* Drawing the bo;rder for items*/
-		graphics.drawImage(cadreInf, x, y+echelleY, cadreInf.getWidth(), cadreInf.getHeight(), null);
-		
+		//graphics.drawImage(cadreInf, x, y+echelleY, cadreInf.getWidth(), cadreInf.getHeight(), null);
+		canvas.drawBitmap(cadreInf, x, y+echelleY, null);
 	}
 	
 	/**
 	 * Draw the right hud, with the weapon associated. When click on the hud, display the weapon list
-	 * @param graphics the graphics2D to print on
+	 * @param graphics the Canvas to print on
 	 */
-	public void drawWeapons(Graphics2D graphics){
+	public void drawWeapons(Canvas canvas){
 		int beginLeftHud = Variables.SCREEN_WIDTH-hudRight.getWidth();
-		graphics.drawImage(hudRight, beginLeftHud, 0, hudRight.getWidth(), hudRight.getHeight(), null);//Right hud
-
-		if(displayItemList == true)//Display menu on click, which is represents by this boolean
-			drawItemList(graphics, Variables.SCREEN_WIDTH-hudRight.getWidth() + 2*hudRight.getWidth()/9, 6*hudRight.getHeight()/11);
+		//graphics.drawImage(hudRight, beginLeftHud, 0, hudRight.getWidth(), hudRight.getHeight(), null);//Right hud
+		canvas.drawBitmap(hudRight, beginLeftHud, 0, null);
 		
-		player.getWeapons().getCurrentWeaponItem().drawItem(graphics, beginLeftHud+hudRight.getWidth()/4, hudRight.getHeight()/4);
+		if(displayItemList == true)//Display menu on click, which is represents by this boolean
+			drawItemList(canvas, Variables.SCREEN_WIDTH-hudRight.getWidth() + 2*hudRight.getWidth()/9, 6*hudRight.getHeight()/11);
+		
+		player.getWeapons().getCurrentWeaponItem().drawItem(canvas, beginLeftHud+hudRight.getWidth()/4, hudRight.getHeight()/4);
 	}
 
 	/**
@@ -213,11 +227,12 @@ public class Hud {
 
 	/**
 	 * Display the HUD, which is compone of several elements : the left hud with the life and score, the right hud with the weapon.
-	 * @param graphics the graphics2D to print on
+	 * @param graphics the Canvas to print on
 	 */
-	public void render(Graphics2D graphics){
+	public void render(Canvas graphics){
 		drawLife(graphics);
-		graphics.drawImage(hudLeft, 0, 0, hudLeft.getWidth(), hudLeft.getHeight(), null);//Draw the right HUD
+		//graphics.drawImage(hudLeft, 0, 0, hudLeft.getWidth(), hudLeft.getHeight(), null);//Draw the right HUD
+		graphics.drawBitmap(hudLeft, 0, 0, null);
 		drawWeapons(graphics);
 		drawScore(graphics);
 	}

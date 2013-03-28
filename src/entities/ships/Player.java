@@ -1,8 +1,10 @@
 package entities.ships;
 
-import java.awt.image.BufferedImage;
-
 import org.jbox2d.common.Vec2;
+
+import com.example.escapeandroid.R;
+
+import android.graphics.Bitmap;
 
 import effects.Effects;
 import effects.Explosion;
@@ -50,17 +52,17 @@ public class Player extends Ship {
 	/**
 	 * Image used to render the invincibility.
 	 */
-	private BufferedImage[] invincibleImages;
+	private Bitmap[] invincibleImages;
 
 	/**
 	 * Image used to render the looping.
 	 */
-	private BufferedImage[] loopingImages;
+	private Bitmap[] loopingImages;
 
 	/**
 	 * Image used to render when the player is being touched.
 	 */
-	private BufferedImage[] touchedImages;
+	private Bitmap[] touchedImages;
 
 	/**
 	 * Looping step used to render.
@@ -131,7 +133,7 @@ public class Player extends Ship {
 	 * @param entities - class which represents our world
 	 */
 	public Player(Entities entities){
-		super(entities, EntityShape.Polygon, Ressources.getImage("ships/playerShip/Joueur.png"), Variables.SCREEN_WIDTH/2, Variables.SCREEN_HEIGHT/7, Variables.SHIP_LIFE);
+		super(entities, EntityShape.Polygon, Ressources.getImage(R.drawable.joueur), Variables.SCREEN_WIDTH/2, Variables.SCREEN_HEIGHT/7, Variables.SHIP_LIFE);
 		weaponItems = new WeaponItems();
 		
 		weaponItems.add(new WeaponItem(WeaponType.Missile, 10));
@@ -149,10 +151,51 @@ public class Player extends Ship {
 		/*
 		 * Set images here
 		 */
-		invincibleImages = new BufferedImage[5];
-		loopingImages = new BufferedImage[22];
-		touchedImages = new BufferedImage[4];
-
+		invincibleImages = new Bitmap[5];
+		invincibleImages[0] = Ressources.getImage(R.drawable.joueur_invincible1);
+		invincibleImages[1] = Ressources.getImage(R.drawable.joueur_invincible2);
+		invincibleImages[2] = Ressources.getImage(R.drawable.joueur_invincible3);
+		invincibleImages[3] = Ressources.getImage(R.drawable.joueur_invincible4);
+		invincibleImages[4] = Ressources.getImage(R.drawable.joueur_invincible5);
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		loopingImages = new Bitmap[22];
+		loopingImages[0] = Ressources.getImage(R.drawable.joueur_loop1);	
+		loopingImages[1] = Ressources.getImage(R.drawable.joueur_loop2);
+		loopingImages[2] = Ressources.getImage(R.drawable.joueur_loop3);
+		loopingImages[3] = Ressources.getImage(R.drawable.joueur_loop4);
+		loopingImages[4] = Ressources.getImage(R.drawable.joueur_loop5);
+		loopingImages[5] = Ressources.getImage(R.drawable.joueur_loop6);
+		loopingImages[6] = Ressources.getImage(R.drawable.joueur_loop7);
+		loopingImages[7] = Ressources.getImage(R.drawable.joueur_loop8);
+		loopingImages[8] = Ressources.getImage(R.drawable.joueur_loop9);
+		loopingImages[9] = Ressources.getImage(R.drawable.joueur_loop10);
+		loopingImages[10] = Ressources.getImage(R.drawable.joueur_loop11);
+		loopingImages[11] = Ressources.getImage(R.drawable.joueur_loop12);
+		loopingImages[12] = Ressources.getImage(R.drawable.joueur_loop13);
+		loopingImages[13] = Ressources.getImage(R.drawable.joueur_loop14);
+		loopingImages[14] = Ressources.getImage(R.drawable.joueur_loop15);
+		loopingImages[15] = Ressources.getImage(R.drawable.joueur_loop16);
+		loopingImages[16] = Ressources.getImage(R.drawable.joueur_loop17);
+		loopingImages[17] = Ressources.getImage(R.drawable.joueur_loop18);
+		loopingImages[18] = Ressources.getImage(R.drawable.joueur_loop19);
+		loopingImages[19] = Ressources.getImage(R.drawable.joueur_loop20);
+		
+		touchedImages = new Bitmap[4];
+		touchedImages[0] = Ressources.getImage(R.drawable.joueur_red1);
+		touchedImages[1] = Ressources.getImage(R.drawable.joueur_red2);
+		touchedImages[2] = Ressources.getImage(R.drawable.joueur_red3);
+		touchedImages[3] = Ressources.getImage(R.drawable.joueur_red4);
+		
+		/*
 		for(int i=0; i<invincibleImages.length; i++){
 			invincibleImages[i] = Ressources.getImage("ships/playerShip/Joueur_invincible"+(i+1)+".png");	
 		}
@@ -162,6 +205,7 @@ public class Player extends Ship {
 		for(int i=0; i<touchedImages.length; i++){
 			touchedImages[i] = Ressources.getImage("ships/playerShip/Joueur_red"+(i+1)+".png");
 		}
+		*/
 
 		getBody().setFixedRotation(true);
 		setCollisionListener(true);
@@ -268,7 +312,7 @@ public class Player extends Ship {
 	 * @return the Image associated with the current step of the animation
 	 */
 	@Override
-	public BufferedImage getImage() {		
+	public Bitmap getImage() {		
 		step++;
 		if(invincible){
 			return invincibleRender();
@@ -288,8 +332,8 @@ public class Player extends Ship {
 	 * Do the render of the invincibility of the player
 	 * @return the Image associated with the current step of the invincibility
 	 */
-	private BufferedImage invincibleRender(){
-		BufferedImage image = invincibleImages[currentFrame];
+	private Bitmap invincibleRender(){
+		Bitmap image = invincibleImages[currentFrame];
 		if(step>INVINCIBLE_STEP){
 			step=0;		
 			currentFrame++;
@@ -309,8 +353,8 @@ public class Player extends Ship {
 	 * Do the render when the player is touched
 	 * @return the Image associated with the current step of the animation
 	 */
-	private BufferedImage touchedRender(){
-		BufferedImage image = touchedImages[currentFrame];
+	private Bitmap touchedRender(){
+		Bitmap image = touchedImages[currentFrame];
 		if(step>TOUCHED_STEP){
 			step=0;			
 			currentFrame++;
@@ -330,8 +374,8 @@ public class Player extends Ship {
 	 * Do the render of the loop of the player
 	 * @return the Image associated with the current step of the loop
 	 */
-	private BufferedImage loopRender(){	
-		BufferedImage image = loopingImages[currentFrame];
+	private Bitmap loopRender(){	
+		Bitmap image = loopingImages[currentFrame];
 		if(step>LOOPING_STEP){
 			step=0;			
 			switch(loopDirection){

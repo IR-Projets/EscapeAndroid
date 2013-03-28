@@ -1,7 +1,6 @@
 package factories;
 
-import java.awt.image.BufferedImage;
-
+import android.graphics.Bitmap;
 import entities.Entities;
 import entities.ships.Player;
 import entities.ships.enemies.Boss;
@@ -63,7 +62,7 @@ public class ShipFactory extends EntityFactory {
 	 * @param behavior - the enemyBehavior associated with this enemy
 	 * @return the new enemy create
 	 */
-	public Enemy createEnnemy(BufferedImage image, int x, int y, int life, EnemyBehavior behavior) {
+	public Enemy createEnnemy(Bitmap image, int x, int y, int life, EnemyBehavior behavior) {
 		Enemy enemy = new Enemy(getEntities(), image, x, y, life, behavior);
 		createEntity(enemy);
 		return enemy;
@@ -78,7 +77,7 @@ public class ShipFactory extends EntityFactory {
 	 * @param behavior - the enemyBehavior associated with this enemy
 	 * @return the new enemy create
 	 */
-	public Boss createBoss(BufferedImage image, int x, int y, int life, EnemyBehavior behavior) {
+	public Boss createBoss(Bitmap image, int x, int y, int life, EnemyBehavior behavior) {
 		Boss boss = new Boss(getEntities(), image, x, y, life, behavior);
 		createEntity(boss);
 		return boss;

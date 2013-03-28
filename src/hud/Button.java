@@ -1,5 +1,7 @@
 package hud;
 
+import com.example.escapeandroid.R;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
@@ -69,13 +71,13 @@ public abstract class Button {
 		this.type=type;
 		switch(type){
 		case PAUSE:
-			this.image = Ressources.getImage("buttons/buttonPause.png");
+			this.image = Ressources.getImage(R.drawable.button_pause);
 			break;
 		case PLAY:
-			this.image = Ressources.getImage("buttons/buttonPlay.png");
+			this.image = Ressources.getImage(R.drawable.button_play);
 			break;
 		case SKIP:
-			this.image = Ressources.getImage("buttons/buttonSkip.png");
+			this.image = Ressources.getImage(R.drawable.button_skip);
 			break;
 		}
 	}

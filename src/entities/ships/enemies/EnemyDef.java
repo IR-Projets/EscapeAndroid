@@ -1,6 +1,7 @@
 package entities.ships.enemies;
 
-import java.awt.image.BufferedImage;
+import android.graphics.Bitmap;
+
 
 /**
  * The EnemyDef class represents is used for load all the elements of the XML file.
@@ -27,7 +28,7 @@ import java.awt.image.BufferedImage;
  *
  */
 public class EnemyDef {
-	private final BufferedImage image;
+	private final Bitmap image;
 	private final EnemyBehavior behavior;
 	private final int x, y, life;
 	private final int time;
@@ -43,7 +44,7 @@ public class EnemyDef {
 	 * @param time - the time before the enemy appear
 	 * @param isBoss - a boolean for knows if the enemy is a boss
 	 */
-	public EnemyDef(BufferedImage image, EnemyBehavior behavior, int x, int y, int life, int time, boolean isBoss){
+	public EnemyDef(Bitmap image, EnemyBehavior behavior, int x, int y, int life, int time, boolean isBoss){
 		this.image = image;
 		this.behavior = behavior;
 		this.x = x;
@@ -57,7 +58,7 @@ public class EnemyDef {
 	 * Returns the image of the enemy
 	 * @return the image of the enemy
 	 */
-	public BufferedImage getImage() {
+	public Bitmap getImage() {
 		return image;
 	}
 

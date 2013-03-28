@@ -5,8 +5,13 @@ import java.io.InputStream;
 import java.util.Hashtable;
 import java.util.Map;
 
+import com.example.escapeandroid.R;
+
+import fr.umlv.android.MainActivity;
+
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.GetChars;
 
 
 /**
@@ -39,7 +44,7 @@ public class Ressources {
 	/**
 	 * We use a map for avoid to initialize the same image twice.
 	 */
-	private static final Map<String, Bitmap> images = new Hashtable<String, Bitmap>();
+	private static final Map<Integer, Bitmap> images = new Hashtable<Integer, Bitmap>();
 	
 	/**
 	 * Load a BufferedImage;
@@ -47,19 +52,22 @@ public class Ressources {
 	 * @param optimized Set the optimisation, usefull for big image without transparency (default false)
 	 * @return BufferedImage
 	 */
-	public static Bitmap getImage(String fileName, boolean optimized){
+	public static Bitmap getImage(int idRessource, boolean optimized){
 		Bitmap image = null;
-		String filePath = Variables.IMAGES_URL + fileName;
+		//String filePath = Variables.IMAGES_URL + fileName;
 		
-		if(images.containsKey(filePath)){
-			return images.get(filePath);
+		if(images.containsKey(idRessource)){
+			return images.get(idRessource);
 		}
 		
-		ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+		//ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		try {
-			image = BitmapFactory.decodeFile(filePath);
+			//image = BitmapFactory.decodeFile(filePath);
+			image = BitmapFactory.decodeResource(MainActivity.get().getResources(), R.drawable.ic_launcher);
+			if(image==null)
+				throw new Exception();
 		} catch (Exception e) {
-			System.out.println("Can't read file: " + filePath + System.getProperty("line.separator"));
+			System.out.println("Can't read file: " + MainActivity.get().getResources().getResourceName(idRessource) + System.getProperty("line.separator"));
 			e.printStackTrace();
 			System.exit(0);
 		}
@@ -67,7 +75,7 @@ public class Ressources {
 		//if(optimized)
 		//	image = optimise(image);
 		
-		images.put(filePath, image);
+		images.put(idRessource, image);
 		return image;		
 	}
 	
@@ -76,8 +84,8 @@ public class Ressources {
 	 * @param url Image to be loaded (must be in a package)
 	 * @return BufferedImage
 	 */
-	public static Bitmap getImage(String url){
-		return getImage(url, false);
+	public static Bitmap getImage(int idRessource){
+		return getImage(idRessource, false);
 	}
 	
 	public static InputStream getFile(String url){

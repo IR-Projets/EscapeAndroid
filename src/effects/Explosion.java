@@ -1,9 +1,12 @@
 package effects;
 
+import com.example.escapeandroid.R;
+
+import fr.umlv.android.MainActivity;
 import game.Ressources;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 /**
  * The Explosion effects implements the class Effects, and do the explosion effect.
@@ -39,7 +42,7 @@ public class Explosion extends Effects {
 	/**
 	 * A tab of images, for doing the render with different sprite.
 	 */
-	private BufferedImage[] images;
+	private Bitmap[] images;
 	
 	/**
 	 * the index of the current image to render.
@@ -70,17 +73,17 @@ public class Explosion extends Effects {
 		this.x=x;
 		this.y=y;
 		currentImage = currentIte = 0;
-		images = new BufferedImage[4];
-		
-		for(int i=0; i<images.length; i++){  
-			images[i] = Ressources.getImage("effects/fire"+i+".png");				
-		}
+		images = new Bitmap[4];
+		images[0] = Ressources.getImage(R.drawable.fire0);
+		images[1] = Ressources.getImage(R.drawable.fire1);
+		images[2] = Ressources.getImage(R.drawable.fire2);
+		images[3] = Ressources.getImage(R.drawable.fire3);
 	}
 	
 	
 	@Override
-	public void renderEffect(Graphics2D graphics) {		
-		graphics.drawImage(images[currentImage], x, y, null);
+	public void renderEffect(Canvas canvas) {		
+		canvas.drawBitmap(images[currentImage], x, y, null);
 	}
 
 	/**

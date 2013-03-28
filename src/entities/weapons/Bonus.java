@@ -1,8 +1,13 @@
 package entities.weapons;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.view.View.MeasureSpec;
 import entities.Entities;
 import entities.Entity;
 import factories.WeaponFactory.WeaponType;
@@ -36,7 +41,7 @@ public class Bonus extends Entity {
 	/**
 	 * the image of the Bonus.
 	 */
-	private final BufferedImage imageItem;
+	private final Bitmap imageItem;
 	
 	/**
 	 * The WeapontItem associated with the Bonus, which contains a quantity and a WeaponType
@@ -56,16 +61,25 @@ public class Bonus extends Entity {
 		super(entities, EntityShape.Square.get(entities, x, y, weaponItem.getImage().getWidth(), weaponItem.getImage().getHeight()));
 		this.weaponItem = weaponItem;
 		
-		BufferedImage imageTmp = weaponItem.getImage();
-		imageItem =  new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D graphics = imageItem.createGraphics();
+		Bitmap imageTmp = weaponItem.getImage();
+		//imageItem =  new Bitmap(30, 30, Bitmap.TYPE_INT_ARGB);
+		imageItem = Bitmap.createBitmap(30, 30, Bitmap.Config.ARGB_8888);;// new Bitmap(30, 30);
+		Canvas canvas = new Canvas(imageItem);
 		
-		graphics.drawImage(imageTmp, 0, 2, null);
-		graphics.setColor(Variables.BLACK);
-		graphics.drawOval(0, 0, 29, 29);
 		
-		graphics.setColor(Variables.WHITE);
-		graphics.drawString(String.valueOf(getQuantity()), 20, 23);//display the amount of the item
+		
+		canvas.drawBitmap(imageTmp, 0, 2, null);
+		Paint paint = new Paint(0);
+		paint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
+		
+		paint.setColor(Color.argb(255, 0, 0, 0));
+		RectF rect = new RectF(0, 0, 29, 29);
+		canvas.drawOval(rect, paint);
+		
+		
+		
+		paint.setColor(Color.argb(255, 255, 255, 255));
+		canvas.drawText(String.valueOf(getQuantity()), 20, 23, paint);//display the amount of the item
 		
 		setCollisionGroup(EntityType.Bonus);
 	}
@@ -90,7 +104,7 @@ public class Bonus extends Entity {
 	}
 
 	@Override
-	public BufferedImage getImage() {
+	public Bitmap getImage() {
 		return imageItem;
 	}
 

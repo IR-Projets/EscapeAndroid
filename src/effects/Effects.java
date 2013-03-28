@@ -1,9 +1,10 @@
 package effects;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import android.graphics.Canvas;
 
 /**
  * This abstract class represents all effects launch during the scrolling of one map.
@@ -46,11 +47,11 @@ public abstract class Effects {
 	 * Launch the render of each effects of our list, for each layers.
 	 * @param graphics
 	 */
-	public static void render(Graphics2D graphics){
+	public static void render(Canvas canvas){
 		for(List<Effects> effects : layers){
 			if(effects!=null){
 				for(Effects effect : effects){
-					effect.renderEffect(graphics);
+					effect.renderEffect(canvas);
 				}
 			}
 		}
@@ -97,7 +98,7 @@ public abstract class Effects {
 	 * The renderEffect that each Effect needs to implements, for the drawing.
 	 * @param graphics - the graphics to draw on
 	 */
-	public abstract void renderEffect(Graphics2D graphics);
+	public abstract void renderEffect(Canvas canvas);
 	
 	/**
 	 * The computeEffect that each Effect needs to implements, for do some compute.

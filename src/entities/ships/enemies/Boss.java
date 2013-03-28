@@ -1,7 +1,10 @@
 package entities.ships.enemies;
 
-import java.awt.image.BufferedImage;
 import java.util.Random;
+
+import com.example.escapeandroid.R;
+
+import android.graphics.Bitmap;
 
 import effects.Effects;
 import effects.Explosion;
@@ -36,7 +39,7 @@ import hud.Hud;
 
 public class Boss extends Enemy{
 
-	private final BufferedImage[] touchedImages;
+	private final Bitmap[] touchedImages;
 	private boolean touched;
 	private int step;
 	private int TOUCHED_STEP = 100;
@@ -56,16 +59,17 @@ public class Boss extends Enemy{
 	 * @param life - the life of the Boss
 	 * @param behavior - the EnemyBehavior of a Boss, which specify his behavior during the game
 	 */
-	public Boss(Entities entities, BufferedImage image, int x, int y, int life, EnemyBehavior behavior) {
+	public Boss(Entities entities, Bitmap image, int x, int y, int life, EnemyBehavior behavior) {
 		super(entities, EntityShape.Square, image, x, y, life, behavior);
 		rand = new Random();
 		destroyed=false;
 		destroyedStep=0;
 		touched=false;
-		touchedImages = new BufferedImage[3];
-		for(int i=0; i<touchedImages.length; i++){
-			touchedImages[i] = Ressources.getImage("ships/boss1/boss_red"+(i+1)+".png");
-		}
+		touchedImages = new Bitmap[3];
+		touchedImages[0] = Ressources.getImage(R.drawable.boss_red1);
+		touchedImages[1] = Ressources.getImage(R.drawable.boss_red2);
+		touchedImages[2] = Ressources.getImage(R.drawable.boss_red3);
+
 		
 		setCollisionGroup(EntityType.Boss);
 		setVelocity(0, -500);
@@ -102,7 +106,7 @@ public class Boss extends Enemy{
 	
 	
 	@Override
-	public BufferedImage getImage() {		
+	public Bitmap getImage() {		
 		step++;
 		if(touched){
 			return touchedRender();
@@ -115,7 +119,7 @@ public class Boss extends Enemy{
 		}
 	}
 
-	private BufferedImage destroyedRender() {
+	private Bitmap destroyedRender() {
 		destroyedStep++;
 		if(destroyedStep<destroyedStepMax){
 			if(rand.nextInt()%4==0)
@@ -129,8 +133,8 @@ public class Boss extends Enemy{
 		}	
 	}
 
-	private BufferedImage touchedRender() {
-		BufferedImage image = touchedImages[currentFrame];
+	private Bitmap touchedRender() {
+		Bitmap image = touchedImages[currentFrame];
 		if(step>TOUCHED_STEP){
 			step=0;		
 			currentFrame++;

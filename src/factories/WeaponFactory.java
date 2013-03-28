@@ -1,7 +1,8 @@
 package factories;
 
-import java.awt.image.BufferedImage;
+import com.example.escapeandroid.R;
 
+import android.graphics.Bitmap;
 import entities.Entities;
 import entities.weapons.Fireball;
 import entities.weapons.Missile;
@@ -10,6 +11,7 @@ import entities.weapons.ShiboleetExtended;
 import entities.weapons.Shuriken;
 import entities.weapons.Weapon;
 import game.Ressources;
+import game.Variables;
 
 /**
  * This class is a factory of weapon, and make all weapons of ships.
@@ -80,14 +82,14 @@ public class WeaponFactory extends EntityFactory{
 		 * Return the image corresponding to the Weapon.
 		 * @return the image corresponding to the weapon
 		 */
-		public BufferedImage getImage(){
+		public Bitmap getImage(){
 			switch(this){
-			case Shuriken: return Ressources.getImage("weapons/shuriken.png");
-			case Fireball: return Ressources.getImage("weapons/fire.png");
+			case Shuriken: return Ressources.getImage(R.drawable.shuriken);
+			case Fireball: return Ressources.getImage(R.drawable.fire);
 			case Shiboleet: 
-			case ShiboleetExtended: return Ressources.getImage("weapons/shiboleet.png");
-			case Missile: return Ressources.getImage("weapons/missile.png");
-			case Null : return Ressources.getImage("hud/error.png");
+			case ShiboleetExtended: return Ressources.getImage(R.drawable.shiboleet);
+			case Missile: return Ressources.getImage(R.drawable.missile);
+			case Null : return Ressources.getImage(R.drawable.error);
 			default: return null;
 			}
 		}

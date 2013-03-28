@@ -1,5 +1,6 @@
 package game;
 
+import android.content.res.Resources;
 import android.graphics.Color;
 
 
@@ -94,9 +95,5 @@ public class Variables {
 	/*
 	 * Test
 	 */
-	public static final int TEST_LAG = 35;
-	
-	
-	
-	
+	public static final int TEST_LAG = 35;	
 }

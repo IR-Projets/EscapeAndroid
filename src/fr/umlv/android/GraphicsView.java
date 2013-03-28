@@ -29,6 +29,7 @@ public class GraphicsView extends View {
 	RectF oval;
 	int size = 50;
 
+
 	
 	public GraphicsView(Context context, AttributeSet attrs) throws IOException 
 	{
@@ -75,68 +76,6 @@ public class GraphicsView extends View {
 		toast.setText("x: " + event.getX() + ", y: " + event.getY());
 		toast.show();
 		
-		for(int idPtr=0; idPtr<event.getPointerCount(); idPtr++)
-		{
-			float x = event.getX(idPtr);
-			float y = event.getY(idPtr);
-			
-			int alpha = 255;
-			int red = 0;
-			int green = 0;
-			int blue = 0;
-			
-			//Color depends of the pointer (the finger)
-			switch(idPtr)
-			{
-				case 1:
-					red=255;
-					break;
-				case 2:
-					green=255;
-					break;
-				case 3:
-					blue=255;
-					break;
-				case 4:
-					red=255;
-					blue=255;
-					break;
-				case 5:
-					red=255;
-					green=255;
-					break;		
-				case 6:
-					green=255;
-					blue=255;
-					break;	
-				case 7:
-					red=100;
-					green=255;
-					blue=255;
-					break;	
-				case 8:
-					red=200;
-					green=200;
-					blue=200;
-					break;	
-				case 9:
-					red=100;
-					green=200;
-					blue=300;
-					break;	
-				case 10:
-					red=300;
-					green=200;
-					blue=100;
-					break;	
-			}			
-								
-			Canvas canvas = new Canvas(bitmap);
-			oval = new RectF(x-size/2, y-size/2, x+size/2, y+size/2);
-			
-			paint.setColor(Color.argb(alpha, red, green, blue));
-			canvas.drawOval(oval, paint);				
-		}
 		
 		
 		

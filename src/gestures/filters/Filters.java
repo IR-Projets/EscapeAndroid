@@ -4,7 +4,6 @@ import game.Variables;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Objects;
 
 import org.jbox2d.common.Vec2;
 
@@ -90,7 +89,9 @@ public class Filters{
 	 * @return boolean 
 	 */
 	public static boolean isAffine(List<Vec2> trace){
-		Objects.requireNonNull(trace);
+		if(trace == null)
+			throw new IllegalArgumentException("Trace can't be null");
+		
 		if(trace.size()<Variables.TRACE_LENGTH_MIN)
 			return false;
 

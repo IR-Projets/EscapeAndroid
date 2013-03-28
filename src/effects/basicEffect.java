@@ -3,9 +3,10 @@ package effects;
 import game.Ressources;
 import game.Variables;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 import java.util.Random;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 /**
  * The basic Effect class is the effect uses for create some sprites during the display of the map.
@@ -37,24 +38,24 @@ public class basicEffect extends Effects {
 	private float posX;
 	private float posY;
 	private float velocity;
-	private final BufferedImage image;
+	Bitmap image;
 	
 	/**
 	 * Default constructor, which create a basic Effect.
 	 * @param fileName - the name of the file which contains the effect
 	 * @param velocity - the velocity of the effect
 	 */
-	public basicEffect(String fileName, float velocity){
+	public basicEffect(int idResource, float velocity){
 		Random rand = new Random();
 		this.velocity = velocity;		
-		image = Ressources.getImage(fileName);
+		image = Ressources.getImage(idResource);
 		posY = - image.getHeight();
 		posX= rand.nextInt(Variables.SCREEN_WIDTH + 10 - image.getWidth()/2) - 10;
 	}
 	
 	@Override
-	public void renderEffect(Graphics2D graphics) {
-		graphics.drawImage(image, (int)posX, (int)posY, null);
+	public void renderEffect(Canvas canvas) {
+		canvas.drawBitmap(image, (int)posX, (int)posY, null);
 	}
 
 	/**

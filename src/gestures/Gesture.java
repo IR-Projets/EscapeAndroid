@@ -11,7 +11,6 @@ import gestures.filters.Filter;
 import gestures.filters.Filters;
 import gestures.filters.Looping;
 
-import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,7 +94,7 @@ public class Gesture {
 			player.stop();
 			return;
 		}
-		traceStack.render(graphics);
+		traceStack.render(canvas);
 	}
 
 	/**

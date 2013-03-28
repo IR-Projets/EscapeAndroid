@@ -1,10 +1,8 @@
 package entities.weapons;
 
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
-import java.awt.image.BufferedImage;
-
 import org.jbox2d.common.Vec2;
+
+import android.graphics.Bitmap;
 
 import effects.Effects;
 import effects.Explosion;
@@ -36,7 +34,7 @@ import entities.Entity;
  */
 public abstract class Weapon extends Entity{
 	
-	private BufferedImage image;
+	private Bitmap image;
 	private int damage;
 	private boolean isLaunch;
 	private final boolean firedByPlayer;
@@ -51,7 +49,7 @@ public abstract class Weapon extends Entity{
 	 * @param damage - the damage that cause the conflict of the weapon
 	 * @param firedByPlayer - a boolean, for know if the weapon is fired by player
 	 */
-	public Weapon(Entities entities, EntityShape bodyForm, BufferedImage image, int x, int y, int damage, boolean firedByPlayer) {
+	public Weapon(Entities entities, EntityShape bodyForm, Bitmap image, int x, int y, int damage, boolean firedByPlayer) {
 		super(entities, bodyForm.get(entities, x, y, image.getWidth(), image.getHeight()));
 		this.image = image;
 		this.firedByPlayer=firedByPlayer;
@@ -65,7 +63,7 @@ public abstract class Weapon extends Entity{
 	}
 
 	@Override
-	public BufferedImage getImage(){
+	public Bitmap getImage(){
 		return image;
 	}
 
@@ -73,7 +71,7 @@ public abstract class Weapon extends Entity{
 	 * Set the image of the weapon.
 	 * @param image - the new image of the weapon
 	 */
-	public void setImage(BufferedImage image) {
+	public void setImage(Bitmap image) {
 		this.image = image;
 	}
 	
@@ -123,12 +121,13 @@ public abstract class Weapon extends Entity{
 	 * @param coefSize - the coefficient for do the resize
 	 * @return the image resize
 	 */
-	public static BufferedImage resize(BufferedImage image, float coefSize){
-		BufferedImage imageRezise = new BufferedImage((int)(image.getWidth()*coefSize), (int)(image.getHeight()*coefSize), image.getType());
-		AffineTransform at = new AffineTransform();
-		at.scale(coefSize, coefSize);
-		AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		return (scaleOp.filter(image, imageRezise));
+	public static Bitmap resize(Bitmap image, float coefSize){
+//		BufferedImage imageRezise = new BufferedImage((int)(image.getWidth()*coefSize), (int)(image.getHeight()*coefSize), image.getType());
+//		AffineTransform at = new AffineTransform();
+//		at.scale(coefSize, coefSize);
+//		AffineTransformOp scaleOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+//		return (scaleOp.filter(image, imageRezise));
+		return Bitmap.createScaledBitmap(image, (int)(image.getWidth()*coefSize), (int)(image.getWidth()*coefSize), false);
 	}
 
 	/**

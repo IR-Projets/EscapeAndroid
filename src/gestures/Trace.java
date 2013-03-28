@@ -3,9 +3,6 @@ package gestures;
 import game.Variables;
 import gestures.filters.Filter;
 
-import java.awt.AlphaComposite;
-import java.awt.BasicStroke;
-import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +10,10 @@ import java.util.Random;
 
 import org.jbox2d.common.Vec2;
 
+import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 /**
  * The Trace is the class which represents a right drawing.
  * @author Quentin Bernard et Ludovic Feltz
@@ -53,12 +53,19 @@ public class Trace {
 	 */
 	private boolean valid;
 
+	
+	private Paint paint;
+	
 	/**
 	 * Default constructor
 	 */
 	public Trace() {
 		trace = new LinkedList<Vec2>();
 		valid = false;
+		
+		paint = new Paint(0);
+		paint.setColor(Color.argb(255, 0, 0, 0));
+		paint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
 	}
 	
 	/**
@@ -133,8 +140,12 @@ public class Trace {
 	 * Display a Trace, which represents by a List of Vec2
 	 * @param graphics - the graphics to draw on
 	 */
-	public void render(Canvas graphics){
+	public void render(Canvas canvas){
 		Iterator <Vec2> traceIte = trace.iterator();
+		
+		/*
+		 * 	TODO changer la couleur si trace valide !!!
+		 */
 		
 		if(!traceIte.hasNext())
 			return;
@@ -145,16 +156,11 @@ public class Trace {
 		while(traceIte.hasNext()){
 			lastPoint = currentPoint;
 			currentPoint = traceIte.next();
-			
-			graphics.setStroke(new BasicStroke(4));// For have a bigest trace drawing
-			graphics.drawLine((int)lastPoint.x, (int)lastPoint.y, (int)currentPoint.x, (int)currentPoint.y);//The line to trace
-			
-			graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.1f));//Draw a transparence line for effect
-			graphics.setStroke(new BasicStroke(12));
-			graphics.drawLine((int)lastPoint.x, (int)lastPoint.y, (int)currentPoint.x, (int)currentPoint.y);
+
+			canvas.drawLine(lastPoint.x, lastPoint.y, currentPoint.x, currentPoint.y, paint);
+		}
 		
-			graphics.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));//Remove the transparence effect
-		}
-		graphics.setStroke(new BasicStroke(1));//Remove the stroke effect
-		}
+		
+	}
+
 }

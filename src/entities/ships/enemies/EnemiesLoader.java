@@ -3,8 +3,6 @@ package entities.ships.enemies;
 import java.util.Iterator;
 import java.util.List;
 
-import org.omg.CORBA.Environment;
-
 import entities.Entities;
 import factories.ShipFactory;
 import game.Variables;

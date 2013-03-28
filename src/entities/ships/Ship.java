@@ -1,9 +1,8 @@
 package entities.ships;
 
-
-import java.awt.image.BufferedImage;
-
 import org.jbox2d.common.Vec2;
+
+import android.graphics.Bitmap;
 
 import effects.Effects;
 import effects.Explosion;
@@ -46,7 +45,7 @@ public abstract class Ship extends Entity{
 	/**
 	 * the BufferedImage of the ship.
 	 */
-	private final BufferedImage image;
+	private final Bitmap image;
 	
 	/**
 	 * The weapon of the player.
@@ -67,7 +66,7 @@ public abstract class Ship extends Entity{
 	 * @param y - the coordinate associated with y position
 	 * @param life - the life of the ship
 	 */
-	public Ship(Entities entities, EntityShape bodyForm, BufferedImage image, int x, int y, int life){
+	public Ship(Entities entities, EntityShape bodyForm, Bitmap image, int x, int y, int life){
 		super(entities, bodyForm.get(entities, x, y, image.getWidth(), image.getHeight()));
 		this.image= image;
 		this.life=life;
@@ -76,7 +75,7 @@ public abstract class Ship extends Entity{
 	}
 
 	@Override
-	public BufferedImage getImage(){
+	public Bitmap getImage(){
 		return image;
 	}
 

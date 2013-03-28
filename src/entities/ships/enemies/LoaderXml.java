@@ -1,6 +1,5 @@
 package entities.ships.enemies;
 
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,8 +13,12 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import android.graphics.Bitmap;
+
 import entities.ships.enemies.Action.ActionType;
+import fr.umlv.android.MainActivity;
 import game.Ressources;
+import game.Variables;
 
 /**
  * This class is used for load an XML files into an EnemyDef class.
@@ -48,7 +51,7 @@ public class LoaderXml{
 	private enum EnemyType{Enemy, Boss};
 
 	private class EnemyProperties{
-		public BufferedImage image=null;
+		public Bitmap image=null;
 		public int life=-1;
 		public int repeatTime=-1;
 		public List<Action> actions=null;
@@ -246,7 +249,8 @@ public class LoaderXml{
 				if (enemyPropertiesTmp == null || enemyPropertiesTmp.image !=null)
 					throw new SAXException("Enemy tag not specified or image field already init");
 				try{
-					enemyPropertiesTmp.image = Ressources.getImage(sb.toString());
+					int drawableResourceId = MainActivity.get().getResources().getIdentifier(sb.toString(), "drawable", MainActivity.get().getPackageName());
+					enemyPropertiesTmp.image = Ressources.getImage(drawableResourceId);
 				} catch (Exception e){
 					throw new SAXException(qName+" tag should contain an image url");
 				}
@@ -354,7 +358,7 @@ public class LoaderXml{
 		List<EnemyDef> listEnemies = new LinkedList<EnemyDef>();
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
-			factory.setValidating(true);
+			//factory.setValidating(true);
 			SAXParser parser = factory.newSAXParser();
 
 			parser.parse(Ressources.getFile(filename), eh);

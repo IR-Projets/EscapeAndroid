@@ -1,7 +1,6 @@
 package entities.weapons;
 
-import java.awt.Graphics2D;
-
+import android.graphics.Canvas;
 import entities.Entities;
 import factories.WeaponFactory.WeaponType;
 import game.Variables;
@@ -65,8 +64,8 @@ public class Shiboleet extends Weapon {
 	}
 
 	@Override
-	public void render(Graphics2D graphics) {
-		super.render(graphics);
+	public void render(Canvas canvas) {
+		super.render(canvas);
 		if(isLaunch())
 			getBody().setAngularVelocity( 3f);
 	}

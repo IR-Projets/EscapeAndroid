@@ -1,8 +1,7 @@
 package entities.weapons;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import factories.WeaponFactory.WeaponType;
 import game.Variables;
 /**
@@ -35,7 +34,7 @@ public class WeaponItem {
 	/**
 	 * The image associated with the item
 	 */
-	private final BufferedImage image;
+	private final Bitmap image;
 	
 	/**
 	 * the number of item
@@ -70,7 +69,7 @@ public class WeaponItem {
 	 * Return the Image of the Item
 	 * @return the Image of the Item
 	 */
-	public BufferedImage getImage() {
+	public Bitmap getImage() {
 		return image;
 	}
 
@@ -103,17 +102,17 @@ public class WeaponItem {
 	 * @param x the begin of the drawing of the item, at position x
 	 * @param y the begin of the drawing of the item, at position y
 	 */
-	public void drawItem(Graphics2D graphics, int x, int y){
+	public void drawItem(Canvas canvas, int x, int y){
 		int widthItem = getImage().getWidth(), heighItem = getImage().getHeight();
 		
-		graphics.drawImage(getImage(), x, y, null);//display image of the item
-		graphics.setColor(Variables.RED);
-		graphics.drawRect(x+2, y, widthItem-4, heighItem-1);//border of the item image
-		graphics.setColor(Variables.ORANGE);
-		graphics.drawString(weaponType.toString(), x+26, y+15);//Name of the item
+		canvas.drawBitmap(getImage(), x, y, null);//display image of the item
+		//canvas.setColor(Variables.RED);
+		canvas.drawRect(x+2, y, widthItem-4, heighItem-1, null);//border of the item image
+		//canvas.setColor(Variables.ORANGE);
+		canvas.drawPosText(weaponType.toString(), new float[]{x+26, y+15}, null);
 		
-		graphics.setColor(Variables.WHITE);
-		graphics.drawString(String.valueOf(getQuantity()), x+20, y+23);//display the amount of the item
+		//canvas.setColor(Variables.WHITE);
+		canvas.drawPosText(String.valueOf(getQuantity()), new float[]{x+20, y+23}, null);//display the amount of the item
 		
 	}
 }

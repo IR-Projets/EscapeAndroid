@@ -6,6 +6,8 @@ import game.Ressources;
 
 import java.util.Random;
 
+import com.example.escapeandroid.R;
+
 /**
  * This class represents earth map.
  * 
@@ -41,7 +43,7 @@ public class Earth extends Map {
 	 * Default constructor.
 	 */
 	public Earth(){
-		super(Ressources.getImage("maps/earth.png"), 0.2f);
+		super(Ressources.getImage(R.drawable.earth), 0.2f);
 		loop=0;
 		rand = new Random();
 	}
@@ -58,13 +60,13 @@ public class Earth extends Map {
 			
 			switch(rand.nextInt(3)){
 				case 0:
-					Effects.addEffect(3, new basicEffect("maps/cloud_small.png", randVal*2));//addLayer(new Layer(imageBigCloud, posY - imageBigCloud.getWidth()/2, 2f));
+					Effects.addEffect(3, new basicEffect(R.drawable.cloud_small, randVal*2));//addLayer(new Layer(imageBigCloud, posY - imageBigCloud.getWidth()/2, 2f));
 					break;
 				case 1:
-					Effects.addEffect(2, new basicEffect("maps/cloud_mid.png", randVal));//addLayer(new Layer(imageMidCloud, posY - imageMidCloud.getWidth()/2, 0.5f));
+					Effects.addEffect(2, new basicEffect(R.drawable.cloud_mid, randVal));//addLayer(new Layer(imageMidCloud, posY - imageMidCloud.getWidth()/2, 0.5f));
 					break;
 				case 2:
-					Effects.addEffect(1, new basicEffect("maps/cloud_big.png", randVal/0.5f));//addLayer(new Layer(imageSmallCloud, posY - imageSmallCloud.getWidth()/2, 0.1f));
+					Effects.addEffect(1, new basicEffect(R.drawable.cloud_big, randVal/0.5f));//addLayer(new Layer(imageSmallCloud, posY - imageSmallCloud.getWidth()/2, 0.1f));
 					break;
 			}			
 		}	

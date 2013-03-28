@@ -3,7 +3,6 @@ package gestures;
 import game.Variables;
 import gestures.filters.Filter;
 
-import java.awt.Graphics2D;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,12 +64,7 @@ public class TraceStack {
 		while(tracesIte.hasNext()){
 			Trace trace = tracesIte.next();
 			
-			if(trace.isValid()==true)
-				graphics.setColor(Variables.GREEN);
-			else
-				graphics.setColor(Variables.RED);
-			
-			trace.render(graphics);
+			trace.render(canvas);
 			
 			trace.removeLastPoint();
 			if(trace.isEmpty())
