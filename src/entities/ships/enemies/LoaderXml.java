@@ -250,9 +250,11 @@ public class LoaderXml{
 					throw new SAXException("Enemy tag not specified or image field already init");
 				try{
 					int drawableResourceId = MainActivity.get().getResources().getIdentifier(sb.toString(), "drawable", MainActivity.get().getPackageName());
+					if(drawableResourceId==0)
+						throw new Exception();
 					enemyPropertiesTmp.image = Ressources.getImage(drawableResourceId);
 				} catch (Exception e){
-					throw new SAXException(qName+" tag should contain an image url");
+					throw new SAXException(qName+" tag error: " + sb.toString() + " Not found");
 				}
 				return;
 			}

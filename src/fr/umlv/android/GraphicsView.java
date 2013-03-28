@@ -3,6 +3,7 @@ package fr.umlv.android;
 import java.io.IOException;
 
 import game.Game;
+import game.Variables;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
@@ -53,18 +54,18 @@ public class GraphicsView extends View {
 	protected void onDraw(Canvas canvas) 
 	{
 		super.onDraw(canvas);
-		canvas.drawBitmap(bitmap, matrix, paint);
 		
 		game.run(canvas);
+		
+		invalidate();
 	}
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 
 	{
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		 
-		if(bitmap==null)
-			bitmap = Bitmap.createBitmap(MeasureSpec.getSize(widthMeasureSpec), MeasureSpec.getSize(heightMeasureSpec), Bitmap.Config.ARGB_8888);	
+		super.onMeasure(widthMeasureSpec, heightMeasureSpec);	
+		Variables.SCREEN_WIDTH = MeasureSpec.getSize(widthMeasureSpec);
+		Variables.SCREEN_HEIGHT = MeasureSpec.getSize(heightMeasureSpec);
 	}
 	
 	@Override
@@ -74,13 +75,11 @@ public class GraphicsView extends View {
 		if(toast==null)
 			toast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
 		toast.setText("x: " + event.getX() + ", y: " + event.getY());
-		toast.show();
+		toast.show();		
 		
-		
-		
-		
-		invalidate();
+		//invalidate();
 		
 		return true;	
 	}
+	
 }

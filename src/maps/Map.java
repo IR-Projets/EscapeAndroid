@@ -77,7 +77,7 @@ public abstract class Map{
 		if(posY<0)
 			posY=0;
 
-		canvas.drawBitmap(ground, new Rect(0, (int)posY, subImgW, subImgH), new Rect(0, 0, Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT), null);
+		canvas.drawBitmap(ground, new Rect(0, (int)posY, subImgW, (int)posY+subImgH), new Rect(0, 0, Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT), null);
 	}
 	
 

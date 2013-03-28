@@ -4,7 +4,7 @@
 
 	<enemy id="ship">
 		<life>25</life>
-		<image>ships/ship_big.png</image>
+		<image>ship_big</image>
 
 		<appear time="5">
 			<posX>150</posX>
@@ -92,7 +92,7 @@
 	
 	<enemy id="enemy1">
 		<life>35</life>
-		<image>ships/enemy1.png</image>
+		<image>enemy1</image>
 
 		<appear time="20">
 			<posX>150</posX>
@@ -141,7 +141,7 @@
 	
 	<enemy id="enemy2">
 		<life>45</life>
-		<image>ships/enemy2.png</image>
+		<image>enemy2</image>
 
 		<appear time="15">
 			<posX>150</posX>
@@ -191,7 +191,7 @@
 	
 	<enemy id="enemy3">
 		<life>65</life>
-		<image>ships/enemy3.png</image>
+		<image>enemy3</image>
 
 		<appear time="20">
 			<posX>150</posX>
@@ -266,7 +266,7 @@
 
 	<boss>
 		<life>400</life>
-		<image>ships/boss1/boss.png</image>
+		<image>boss</image>
 
 		<appear time="85">
 			<posX>150</posX>

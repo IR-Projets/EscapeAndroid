@@ -63,11 +63,11 @@ public class Ressources {
 		//ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 		try {
 			//image = BitmapFactory.decodeFile(filePath);
-			image = BitmapFactory.decodeResource(MainActivity.get().getResources(), R.drawable.ic_launcher);
+			image = BitmapFactory.decodeResource(MainActivity.get().getResources(), idRessource);
 			if(image==null)
 				throw new Exception();
 		} catch (Exception e) {
-			System.out.println("Can't read file: " + MainActivity.get().getResources().getResourceName(idRessource) + System.getProperty("line.separator"));
+			System.out.println("Can't read resource: " + idRessource + System.getProperty("line.separator"));
 			e.printStackTrace();
 			System.exit(0);
 		}
