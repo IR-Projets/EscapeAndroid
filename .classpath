@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="game/MainTest.java|game/MainGame.java|story/BackGround.java|story/Narator.java|story/Story.java" kind="src" path="src"/>
+	<classpathentry kind="src" path="gen"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
+	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry kind="lib" path="/Escape/libs/jbox2d-library-2.1.2.2.jar" sourcepath="/Escape/libs/jbox2d-library-2.1.2.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Escape/libs/jbox2d-library-2.1.2.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Escape/libs/zen2.jar" sourcepath="/Escape/libs/zen2_src"/>
+	<classpathentry kind="lib" path="/Escape/libs/jbox2d-testbed-2.1.2.2.jar" sourcepath="/Escape/libs/jbox2d-testbed-2.1.2.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:platform:/resource/Escape/libs/jbox2d-testbed-2.1.2.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="bin/classes"/>
+</classpath>
