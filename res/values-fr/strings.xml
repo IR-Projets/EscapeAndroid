@@ -3,9 +3,10 @@
 
     <string name="app_name">EscapeAndroid</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="play_button">Play</string>
-    <string name="edit_button">Game Editor</string>
+    <string name="hello_world">Bonjour le monde</string>
+    <string name="play_button">Jouer</string>
+    <string name="edit_button">Editeur de jeu</string>
     <string name="credits_button">Credits</string>
+    
     
 </resources>

@@ -1,27 +1,37 @@
 package fr.umlv.android;
 
-import game.Variables;
+import java.util.Locale;
+
+import android.app.Activity;
+import android.content.res.Configuration;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.escapeandroid.R;
-
-import android.os.Bundle;
-import android.app.Activity;
-import android.content.res.Resources;
-import android.view.Menu;
 
 public class MainActivity extends Activity {
 
 	private static MainActivity instance;
-	
+
+	private Button french_button, english_button;
+	private Button play_button;
+	public Locale myLocale;
+
+
 	public static MainActivity get(){
 		return instance;
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		instance = this;
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.activity_main);	
+		addButtonListener();		
 	}
 
 	@Override
@@ -30,4 +40,49 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+
+
+	private void addButtonListener() {
+		french_button = (Button)findViewById(R.id.french_button);
+		english_button = (Button)findViewById(R.id.english_button);
+		play_button = (Button)findViewById(R.id.play_button);
+
+
+		french_button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				myLocale = Locale.FRENCH;
+				changeLanguage();
+			}
+		});
+
+		english_button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				myLocale = Locale.ENGLISH;
+				changeLanguage();
+			}
+		});
+
+		play_button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setContentView(R.layout.activity_game);	
+			}
+		});
+
+	}
+
+	private void changeLanguage (){
+		Locale.setDefault(myLocale);
+		Configuration config = new Configuration();
+		config.locale = myLocale;
+		getBaseContext().getResources().updateConfiguration(config, getBaseContext().getResources().getDisplayMetrics());
+
+		// refresh UI - get values from localized resources
+		((TextView) findViewById(R.id.play_button)).setText(R.string.play_button);
+		((TextView) findViewById(R.id.edit_button)).setText(R.string.edit_button);
+		((TextView) findViewById(R.id.credits_button)).setText(R.string.credits_button);  
+	}
+
 }

@@ -1,11 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/defaultLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-	<fr.umlv.android.GraphicsView
-	    android:layout_width="match_parent"
-	    android:layout_height="match_parent" />
-    
-</LinearLayout>
+    android:background="@drawable/main_menu"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <!--
+         <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/french_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="177dp"
+        android:text="@string/hello_world" />
+        
+    -->
+
+    <RelativeLayout
+        android:id="@+id/layout_flag_french"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:background="@layout/border_button" >
+
+        <Button
+            android:id="@+id/french_button"
+            android:layout_width="75dip"
+            android:layout_height="50dip"
+            android:background="@drawable/flag_france"
+            android:padding="5dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_flag_english"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/layout_flag_french"
+        android:layout_toLeftOf="@+id/layout_flag_french"
+        android:background="@layout/border_button" >
+
+        <Button
+            android:id="@+id/english_button"
+            android:layout_width="75dip"
+            android:layout_height="50dip"
+            android:background="@drawable/flag_angleterre" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/play_button"
+        android:layout_width="150dip"
+        android:layout_height="45dip"
+        android:layout_above="@+id/edit_button"
+        android:layout_alignLeft="@+id/credits_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dip"
+        android:background="@drawable/menu_border"
+        android:textColor="@android:color/holo_blue_dark"
+        android:text="@string/play_button" />
+
+    <Button
+        android:id="@+id/edit_button"
+        android:layout_width="150dip"
+        android:layout_height="45dip"
+        android:layout_above="@+id/credits_button"
+        android:layout_alignLeft="@+id/play_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dip"
+        android:background="@drawable/menu_border"
+        android:textColor="@android:color/holo_blue_dark"
+        android:text="@string/edit_button" />
+
+    <Button
+        android:id="@+id/credits_button"
+        android:layout_width="150dip"
+        android:layout_height="45dip"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="85dip"
+        android:background="@drawable/menu_border"
+        android:textColor="@android:color/holo_blue_dark"
+        android:text="@string/credits_button" />
+
+</RelativeLayout>
