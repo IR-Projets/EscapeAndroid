@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.escapeandroid.R;
@@ -18,7 +19,7 @@ public class MainActivity extends Activity {
 	private static MainActivity instance;
 
 	private Button french_button, english_button;
-	private Button play_button;
+	private Button play_button, edit_button;
 	public Locale myLocale;
 
 
@@ -46,6 +47,7 @@ public class MainActivity extends Activity {
 		french_button = (Button)findViewById(R.id.french_button);
 		english_button = (Button)findViewById(R.id.english_button);
 		play_button = (Button)findViewById(R.id.play_button);
+		edit_button = (Button)findViewById(R.id.edit_button);
 
 
 		french_button.setOnClickListener(new OnClickListener() {
@@ -68,6 +70,13 @@ public class MainActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				setContentView(R.layout.activity_game);	
+			}
+		});
+		
+		edit_button.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				setContentView(R.layout.activity_editor);	
 			}
 		});
 

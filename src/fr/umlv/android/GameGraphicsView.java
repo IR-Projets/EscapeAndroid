@@ -17,34 +17,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
-public class GraphicsView extends View {
+public class GameGraphicsView extends View {
 
-	Toast toast = null;
-	
 	Game game;
-	
-	Bitmap bitmap;
-	Matrix matrix;
-	
-	Paint paint;
-	RectF oval;
-	int size = 50;
-
 
 	
-	public GraphicsView(Context context, AttributeSet attrs) throws IOException 
+	public GameGraphicsView(Context context, AttributeSet attrs) throws IOException 
 	{
-		super(context, attrs);
-		init();		
-	}
-
-	
-	private void init() throws IOException 
-	{
-		paint = new Paint(0);
-		paint.setColor(Color.argb(255, 0, 0, 0));
-		paint.setMaskFilter(new BlurMaskFilter(5, BlurMaskFilter.Blur.NORMAL));
-		matrix = new Matrix();
+		super(context, attrs);		
 	}
 
 	
@@ -80,15 +60,7 @@ public class GraphicsView extends View {
 	@Override
 	public boolean onTouchEvent(MotionEvent event) 
 	{	
-		if(toast==null)
-			toast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
-		toast.setText("x: " + event.getX() + ", y: " + event.getY());
-		toast.show();		
-		
 		game.event(event);
-		
-		//invalidate();
-		
 		return true;	
 	}
 	

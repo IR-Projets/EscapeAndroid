@@ -35,8 +35,8 @@ import android.graphics.Rect;
 
 public abstract class Map{
 
-	private final Bitmap ground;
-	private float posY;
+	protected Bitmap ground;
+	protected float posY;
 	private int subImgW;
 	private int subImgH;
 	private float velocity;

@@ -1,17 +1,13 @@
 package game;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Hashtable;
 import java.util.Map;
-
-import com.example.escapeandroid.R;
 
 import fr.umlv.android.MainActivity;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.text.GetChars;
 
 
 /**
