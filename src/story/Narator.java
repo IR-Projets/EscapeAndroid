@@ -1,59 +1,68 @@
 package story;
+import android.graphics.*;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
 
 public class Narator{
 	
-	private static int IMAGE_SIZE = 100;
-	private static int TEXT_SIZE = 5;
+	//private static int IMAGE_SIZE = 150;
+	private static int TEXT_SIZE = 20;
 	private static long TIME_SKIP = 150*1000000;
 	
 	
-	private BufferedImage[] images;
+	private Bitmap[] images;
 	private int imageIndex;
 	private int posX, posY;
+	private int sizeX, sizeY;
 	private int textX, textY;
 	long time, lastTime;
 	
-	public Narator(BufferedImage[] images, int posX, int posY) {
+	private Paint paint;
+	
+	public Narator(Bitmap[] images, int posX, int posY) {
 		this.images = images;
 		this.posX = posX;
 		this.posY = posY;
+		this.sizeX = images[0].getWidth();
+		this.sizeY = images[0].getHeight();
 		this.textX = posX-20;
-		this.textY = posY+IMAGE_SIZE+20;
+		this.textY = posY+sizeY+30;
+		
+
+		paint = new Paint(0);
+		paint.setColor(Color.WHITE);
+		paint.setTextSize(TEXT_SIZE);
 	}
 	
 	/*
 	 * Draw the narrator with lips movements
 	 */
-	public void speak(Graphics2D g, String text){
-		drawText(g, text, textX, textY);
-		drawAnimatedImage(g);
+	public void speak(Canvas canvas, String text){
+		drawText(canvas, text, textX, textY);
+		drawAnimatedImage(canvas);
 	}
 	/*
 	 * Only draw figed narrator
 	 */
-	public void draw(Graphics2D g){
-		g.drawImage(images[0], posX, posY, IMAGE_SIZE, IMAGE_SIZE, null);
+	public void draw(Canvas canvas){
+		canvas.drawBitmap(images[0], new Rect(0, 0, sizeX, sizeY), new Rect(posX, posY, posX+sizeX, posY+sizeY), null);
 	}
 	
 	/*
 	 * Private methods
 	 */
-	private void drawAnimatedImage(Graphics2D graphics){
+	private void drawAnimatedImage(Canvas canvas){
 		time=System.nanoTime();
 		if(time>lastTime+TIME_SKIP){
 			lastTime=time;
 			imageIndex = (imageIndex+1) % images.length;
 		}
-		graphics.drawImage(images[imageIndex], posX, posY, IMAGE_SIZE, IMAGE_SIZE, null);
+		canvas.drawBitmap(images[imageIndex], new Rect(0, 0, sizeX, sizeY), new Rect(posX, posY, posX+sizeX, posY+sizeY), null);
 	}	
 	
-	private void drawText(Graphics2D graphics, String string, int x, int y){
+	private void drawText(Canvas canvas, String string, int x, int y){
 		String [] lines = string.split("\n");
 		for(int i=0; i<lines.length; i++){
-			graphics.drawString(lines[i], x, y+i*(TEXT_SIZE+10));
+			canvas.drawText(lines[i], x, y+i*(TEXT_SIZE+10), paint);
 		}	
 	}
 }

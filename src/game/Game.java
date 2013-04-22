@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import listeners.EnvironnementListener;
 import factories.EnvironnementFactory;
 import factories.EnvironnementFactory.Level;
+import story.*;
 
 
 /**
@@ -91,7 +92,7 @@ public class Game implements EnvironnementListener{
 	/**
 	 * Our little story.
 	 */
-	//private Story story;
+	private Story story;
 	
 	/**
 	 * The current level of the game.
@@ -114,8 +115,8 @@ public class Game implements EnvironnementListener{
 		//offscreen = new BufferedImage(Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 		//offscreen = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration().createCompatibleImage(Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT, Transparency.OPAQUE);
 		//bufferGraphics = offscreen.createGraphics();
-		//story = new Story();
-		//story.loadStory1();
+		story = new Story();
+		story.loadStory1();
 		paused=false;
 		finished=false;
 		next_game_tick = -1;
@@ -132,23 +133,23 @@ public class Game implements EnvironnementListener{
 	public void stateChanged(GameState state) {
 		switch(state){
 		case Loose:
-			//story.loadStory_Loose();
+			story.loadStory_Loose();
 			finished=true;
 			environnement.removeListener(this);
 			break;
 		case Win:
 			switch(level){
 			case Jupiter:
-				//story.loadStory_WinJupiter();
+				story.loadStory_WinJupiter();
 				level = Level.Moon;
 				break;
 			case Moon:
-				//story.loadStory_WinMoon();
+				story.loadStory_WinMoon();
 				level = Level.Earth;
 				break;
 			case Earth:
 				finished=true;
-				//story.loadStory_WinEarth();
+				story.loadStory_WinEarth();
 				break;
 			}	
 			environnement.removeListener(this);
@@ -165,13 +166,13 @@ public class Game implements EnvironnementListener{
 	public void run(Canvas canvas) {				
 		//bufferGraphics.clearRect(0,0,Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT); 
 		//bufferGraphics.setBackground(new Color(0));
-				
-/*		if(story.isLoaded()){
-			story.render(canvas);
-			next_game_tick=-1;
-		}*/
 		if(finished){
 			System.exit(0);
+		}
+			
+		if(story.isLoaded()){
+			story.render(canvas);
+			next_game_tick=-1;
 		}
 		else{
 			if(!paused){
@@ -234,11 +235,11 @@ public class Game implements EnvironnementListener{
 	 * @param event - the MotionEvent, to launch the environment or the story with the event
 	 */
 	public void event(MotionEvent event) {
-		//if(story.isLoaded())
-		//	story.event(event);
-		//else{
+		if(story.isLoaded())
+			story.event(event);
+		else{
 			environnement.event(event);
 			pauseButton.event(event);
-		//}
+		}
 	}
 }
