@@ -3,6 +3,7 @@ package fr.umlv.android;
 import java.util.Locale;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.escapeandroid.R;
+
+import editor.EditorActivity;
 
 public class MainActivity extends Activity {
 
@@ -76,10 +79,16 @@ public class MainActivity extends Activity {
 		edit_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setContentView(R.layout.activity_editor);	
+				//setContentView(R.layout.activity_editor);
+				launchEditor();
 			}
 		});
 
+	}
+	
+	private void launchEditor(){
+		Intent intent = new Intent(this, EditorActivity.class);
+		startActivity(intent);
 	}
 
 	private void changeLanguage (){
