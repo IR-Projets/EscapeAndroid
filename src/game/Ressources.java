@@ -48,7 +48,7 @@ public class Ressources {
 	 * @param optimized Set the optimisation, usefull for big image without transparency (default false)
 	 * @return BufferedImage
 	 */
-	public static Bitmap getImage(int idRessource, boolean optimized){
+	public static Bitmap getImage(int idRessource, double scaleFactor){
 		Bitmap image = null;
 		//String filePath = Variables.IMAGES_URL + fileName;
 		
@@ -60,6 +60,7 @@ public class Ressources {
 		try {
 			//image = BitmapFactory.decodeFile(filePath);
 			image = BitmapFactory.decodeResource(MainActivity.get().getResources(), idRessource);
+			image = Bitmap.createScaledBitmap(image, (int)(image.getWidth() * scaleFactor), (int)(image.getHeight() * scaleFactor), false);
 			if(image==null)
 				throw new Exception();
 		} catch (Exception e) {
@@ -81,7 +82,7 @@ public class Ressources {
 	 * @return BufferedImage
 	 */
 	public static Bitmap getImage(int idRessource){
-		return getImage(idRessource, false);
+		return getImage(idRessource, (double)Variables.SCREEN_WIDTH/Variables.OLD_SCREEN_WIDTH); //On adapte le ratio de l'ecran par rapport a la taille que l'on avait sur PC
 	}
 	
 	public static InputStream getFile(String url){

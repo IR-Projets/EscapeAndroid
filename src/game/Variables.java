@@ -41,6 +41,7 @@ public class Variables {
 	 * Application variables
 	 */
 	public static final String APPLICATION_NAME = "Escape IR";
+	public static final int OLD_SCREEN_WIDTH = 800;		//The Screen width when it was on a computer... (don't want to modify all the code to have a correct display...)
 	public static int SCREEN_WIDTH = 500;
 	public static int SCREEN_HEIGHT = 700;
 	public static final String IMAGES_URL = "images/";
