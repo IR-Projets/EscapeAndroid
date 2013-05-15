@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.escapeandroid.R;
 
 import editor.EditorActivity;
+import editor.LevelsActivity;
 
 public class MainActivity extends Activity {
 
@@ -87,7 +88,7 @@ public class MainActivity extends Activity {
 	}
 	
 	private void launchEditor(){
-		Intent intent = new Intent(this, EditorActivity.class);
+		Intent intent = new Intent(this, LevelsActivity.class);
 		startActivity(intent);
 	}
 

@@ -7,5 +7,8 @@
     <string name="play_button">Play</string>
     <string name="edit_button">Game Editor</string>
     <string name="credits_button">Credits</string>
+    <string name="levels">Levels</string>
+    <string name="descriptionAddition">Image of addition logo</string>
+    <string name="descriptionSub">Image of sub logo</string>    
     
 </resources>
