@@ -72,7 +72,7 @@ public class MainActivity extends Activity {
 		play_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				setContentView(R.layout.activity_game);	
+				launchGame();	
 			}
 		});
 		
@@ -91,6 +91,11 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 
+	private void launchGame(){
+		Intent intent = new Intent(this, GameActivity.class);
+		startActivity(intent);
+	}
+	
 	private void changeLanguage (){
 		Locale.setDefault(myLocale);
 		Configuration config = new Configuration();
