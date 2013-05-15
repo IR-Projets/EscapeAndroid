@@ -89,7 +89,7 @@ public class Story {
 		 */
 		sirud = new Narator(imgSirud, 60, 10);
 		xaroff = new Narator(imgXaroff, Variables.SCREEN_WIDTH-imgXaroff[0].getWidth() - 160, 10);
-		hero = new Narator(imgHero, Variables.SCREEN_WIDTH/2-50, 160);
+		hero = new Narator(imgHero, Variables.SCREEN_WIDTH/2-50, 300);
 		
 		
 		/*
