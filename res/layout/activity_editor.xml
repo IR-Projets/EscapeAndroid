@@ -58,13 +58,13 @@
                 android:src="@drawable/enemy1" />
             
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/enemy2" />
             
             <ImageView
-                android:id="@+id/imageView6"
+                android:id="@+id/imageView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/enemy3" />

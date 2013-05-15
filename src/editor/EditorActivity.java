@@ -34,6 +34,12 @@ public class EditorActivity extends Activity{
 	private void setupViews() {
 		ImageView i1 = (ImageView) findViewById (R.id.imageView1);
 		ImageView i2 = (ImageView) findViewById (R.id.imageView2);
+		ImageView i3 = (ImageView) findViewById (R.id.imageView3);
+		ImageView i4 = (ImageView) findViewById (R.id.imageView4);
+		ImageView i5 = (ImageView) findViewById (R.id.imageView5);
+		ImageView i6 = (ImageView) findViewById (R.id.imageView6);
+		ImageView i7 = (ImageView) findViewById (R.id.imageView7);
+		ImageView i8 = (ImageView) findViewById (R.id.imageView8);
 		
 		OnDragListener dragListener = new View.OnDragListener() {			
 			@Override
@@ -92,8 +98,15 @@ public class EditorActivity extends Activity{
 			    }
 			  };
 		
+			  
 		i1.setOnTouchListener(touchListener);
 		i2.setOnTouchListener(touchListener);
+		i3.setOnTouchListener(touchListener);
+		i4.setOnTouchListener(touchListener);
+		i5.setOnTouchListener(touchListener);
+		i6.setOnTouchListener(touchListener);
+		i7.setOnTouchListener(touchListener);
+		i8.setOnTouchListener(touchListener);
 	}
 	
 	
