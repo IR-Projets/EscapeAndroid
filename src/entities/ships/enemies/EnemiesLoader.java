@@ -3,6 +3,8 @@ package entities.ships.enemies;
 import java.util.Iterator;
 import java.util.List;
 
+import android.graphics.Bitmap;
+
 import entities.Entities;
 import factories.ShipFactory;
 import game.Variables;
@@ -66,10 +68,12 @@ public class EnemiesLoader {
 			while(it.hasNext()){
 				EnemyDef enemyLoad = it.next();
 				if(step > enemyLoad.getTime()){
-					if(enemyLoad.isBoss())
-						shipFactory.createBoss(enemyLoad.getImage(), enemyLoad.getX(), enemyLoad.getY(), enemyLoad.getLife(), enemyLoad.getBehavior());
+					Bitmap image = enemyLoad.getImage();
+					if(enemyLoad.isBoss()){
+						shipFactory.createBoss(image, enemyLoad.getX(), Variables.SCREEN_HEIGHT-image.getHeight()/*enemyLoad.getY()*/, enemyLoad.getLife(), enemyLoad.getBehavior());
+					}
 					else
-						shipFactory.createEnnemy(enemyLoad.getImage(), enemyLoad.getX(), enemyLoad.getY(), enemyLoad.getLife(), enemyLoad.getBehavior());
+						shipFactory.createEnnemy(image, enemyLoad.getX(), Variables.SCREEN_HEIGHT-image.getHeight(), enemyLoad.getLife(), enemyLoad.getBehavior());
 					it.remove();
 				}
 			}
