@@ -2,6 +2,8 @@ package fr.umlv.android;
 
 import java.io.IOException;
 
+import editor.EditorActivity;
+
 import game.Game;
 import game.Variables;
 import android.content.Context;
@@ -19,26 +21,46 @@ import android.widget.Toast;
 
 public class GameGraphicsView extends View {
 
-	Game game;
+	public static Game game;
 
 	
 	public GameGraphicsView(Context context, AttributeSet attrs) throws IOException 
 	{
-		super(context, attrs);		
+		super(context, attrs);	
 	}
-
+	
 	
 	@Override
 	protected void onDraw(Canvas canvas) 
 	{
 		super.onDraw(canvas);
+		initGame();
 		
 		if(game != null){
 			game.run(canvas);
+			if(game.finished){
+				game = null;
+				System.exit(0);
+			}
 			invalidate();	
 		}
 	}
 
+	private void initGame(){
+		if(game == null || game.finished){
+			try {
+				if(EditorActivity.environnement != null)
+					game = new Game(EditorActivity.environnement);
+				else
+					game = new Game();
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(0);
+			}
+			invalidate();
+		}
+	}
+	
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) 
 	{
@@ -46,15 +68,7 @@ public class GameGraphicsView extends View {
 		Variables.SCREEN_WIDTH = MeasureSpec.getSize(widthMeasureSpec);
 		Variables.SCREEN_HEIGHT = MeasureSpec.getSize(heightMeasureSpec);
 		
-		if(game == null){
-			try {
-				game = new Game();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(0);
-			}
-			invalidate();
-		}
+		initGame();
 	}
 	
 	@Override

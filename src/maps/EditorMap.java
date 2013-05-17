@@ -18,6 +18,10 @@ public class EditorMap extends Map{
 		posY += y;
 	}
 	
+	public float getY(){
+		return posY;
+	}
+	
 	/**
 	 * Useless....
 	 */

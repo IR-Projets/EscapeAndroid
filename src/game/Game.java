@@ -87,7 +87,7 @@ public class Game implements EnvironnementListener{
 	/**
 	 * A boolean to know if the game is finished
 	 */
-	private boolean finished;
+	public boolean finished;
 
 	/**
 	 * Our little story.
@@ -128,12 +128,33 @@ public class Game implements EnvironnementListener{
 			}			
 		};
 	}
+	
+	/**
+	 * FOR EDITOR ONLY
+	 * @throws IOException
+	 */
+	public Game(Environnement env) throws IOException{	
+		this.level = Level.Earth; //Comme c'est le dernier nivo (normalement) on gagne...
+		environnement = env;
+		environnement.addListener(this);
+		story = null;
+		paused=false;
+		finished=false;
+		next_game_tick = -1;
+		pauseButton=new Button(ButtonType.PAUSE, Variables.SCREEN_WIDTH/2-32, 10){
+			@Override
+			public void pressed() {
+				pause();
+			}			
+		};
+	}
 
 	@Override
 	public void stateChanged(GameState state) {
 		switch(state){
 		case Loose:
-			story.loadStory_Loose();
+			if(story!=null)
+				story.loadStory_Loose();
 			finished=true;
 			environnement.removeListener(this);
 			break;
@@ -165,14 +186,14 @@ public class Game implements EnvironnementListener{
 	 */
 	public void run(Canvas canvas) {				
 		//bufferGraphics.clearRect(0,0,Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT); 
-		//bufferGraphics.setBackground(new Color(0));
-		if(finished){
-			System.exit(0);
-		}
-			
-		if(story.isLoaded()){
+		//bufferGraphics.setBackground(new Color(0));			
+		if(story != null && story.isLoaded()){
 			story.render(canvas);
 			next_game_tick=-1;
+		}
+		else if(finished){
+			//return;
+			System.exit(0);
 		}
 		else{
 			if(!paused){
@@ -235,7 +256,7 @@ public class Game implements EnvironnementListener{
 	 * @param event - the MotionEvent, to launch the environment or the story with the event
 	 */
 	public void event(MotionEvent event) {
-		if(story.isLoaded())
+		if(story!=null && story.isLoaded())
 			story.event(event);
 		else{
 			environnement.event(event);

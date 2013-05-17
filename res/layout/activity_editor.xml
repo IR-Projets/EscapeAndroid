@@ -5,9 +5,10 @@
     android:orientation="vertical" >
 
 	<editor.EditorGraphicsView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1" />   
+	    android:id="@+id/editorGraphicView"
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:layout_weight="1" />
  
     <HorizontalScrollView
         android:id="@+id/horizontalScrollView1"
@@ -25,18 +26,21 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="enemy1"
                 android:src="@drawable/enemy1" />
             
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="enemy2"
                 android:src="@drawable/enemy2" />
             
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="enemy3"
                 android:src="@drawable/enemy3" />
                         
             <ImageView
@@ -71,5 +75,28 @@
             
         </LinearLayout>
     </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="save"
+            android:text="Save" />
+
+        <Button
+            android:id="@+id/Button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="play"
+            android:text="Play" />
+
+    </LinearLayout>
 
 </LinearLayout>

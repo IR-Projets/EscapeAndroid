@@ -1,31 +1,45 @@
 package editor;
 
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
 
 import com.example.escapeandroid.R;
 
 import maps.EditorMap;
 
+import game.Environnement;
 import game.Variables;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.view.View.OnDragListener;
 
-public class EditorGraphicsView extends View{
+public class EditorGraphicsView extends View implements OnDragListener{
 	
 	EditorMap map;
 	float scrollY;
 	float lastPoint;
 	
+	float vaissX, vaissY;
+	List<Enemy> vaisseaux;
+	
+	
+	
 	public EditorGraphicsView(Context context, AttributeSet attrs) throws IOException 
 	{
 		super(context, attrs);
+		this.setOnDragListener(this);
+		vaisseaux = new LinkedList<Enemy>();
 		//setupViews();
 	}
 
@@ -49,6 +63,10 @@ public class EditorGraphicsView extends View{
 	{
 		super.onDraw(canvas);
 		map.render(canvas);
+		
+		for(Enemy enemy : vaisseaux){
+			enemy.draw(canvas, map.getY());
+		}
 	}
 
 	@Override
@@ -69,5 +87,41 @@ public class EditorGraphicsView extends View{
 	    invalidate();
 	    
 	    return true;	
+	}
+
+	@Override
+	public boolean onDrag(View v, DragEvent event) {
+		// Defines a variable to store the action type for the incoming event
+        final int action = event.getAction();
+
+        // Handles each of the expected events
+        switch(action) {
+
+            case DragEvent.ACTION_DRAG_STARTED:
+                break;
+
+            case DragEvent.ACTION_DRAG_ENTERED: 
+            	break;
+
+            case DragEvent.ACTION_DRAG_LOCATION:
+            	break;
+
+            case DragEvent.ACTION_DRAG_EXITED:
+            	break;
+
+           case DragEvent.ACTION_DROP:
+        	   View view = (View) event.getLocalState();
+        	   vaisseaux.add(new Enemy(view, event.getX(), event.getY() + map.getY()));
+        	   invalidate();
+        	   break;
+
+           case DragEvent.ACTION_DRAG_ENDED:
+        	   break;
+
+           default:
+              Log.e("DragDrop","Unknown action type received by OnDragListener.");
+              break;
+        }
+		return true;
 	}	
 }
