@@ -19,15 +19,14 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="177dp"
         android:text="@string/hello_world" />
-        
     -->
 
     <RelativeLayout
         android:id="@+id/layout_flag_french"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
         android:background="@layout/border_button" >
 
         <Button
@@ -53,39 +52,49 @@
             android:background="@drawable/flag_angleterre" />
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/play_button"
-        android:layout_width="150dip"
-        android:layout_height="45dip"
-        android:layout_above="@+id/edit_button"
-        android:layout_alignLeft="@+id/credits_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dip"
-        android:background="@drawable/menu_border"
-        android:textColor="@android:color/holo_blue_dark"
-        android:text="@string/play_button" />
+    <RelativeLayout
+        android:id="@+id/RelativeLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/layout_flag_french"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/edit_button"
-        android:layout_width="150dip"
-        android:layout_height="45dip"
-        android:layout_above="@+id/credits_button"
-        android:layout_alignLeft="@+id/play_button"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dip"
-        android:background="@drawable/menu_border"
-        android:textColor="@android:color/holo_blue_dark"
-        android:text="@string/edit_button" />
+        <Button
+            android:id="@+id/play_button"
+            android:layout_width="150dip"
+            android:layout_height="45dip"
+            android:layout_above="@+id/edit_button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/menu_border"
+            android:text="@string/play_button"
+            android:textColor="@android:color/holo_blue_dark" />
 
-    <Button
-        android:id="@+id/credits_button"
-        android:layout_width="150dip"
-        android:layout_height="45dip"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="85dip"
-        android:background="@drawable/menu_border"
-        android:textColor="@android:color/holo_blue_dark"
-        android:text="@string/credits_button" />
+        <Button
+            android:id="@+id/credits_button"
+            android:layout_width="150dip"
+            android:layout_height="45dip"
+            android:layout_alignLeft="@+id/edit_button"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="72dp"
+            android:background="@drawable/menu_border"
+            android:text="@string/credits_button"
+            android:textColor="@android:color/holo_blue_dark" />
+
+        <Button
+            android:id="@+id/edit_button"
+            android:layout_width="150dip"
+            android:layout_height="45dip"
+            android:layout_above="@+id/credits_button"
+            android:layout_alignLeft="@+id/play_button"
+            android:layout_marginBottom="42dp"
+            android:background="@drawable/menu_border"
+            android:text="@string/edit_button"
+            android:textColor="@android:color/holo_blue_dark" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

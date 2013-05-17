@@ -8,7 +8,11 @@
     <string name="edit_button">Game Editor</string>
     <string name="credits_button">Credits</string>
     <string name="levels">Levels</string>
+    <string name="level1">Level 1</string>
+    <string name="level">Level</string>
     <string name="descriptionAddition">Image of addition logo</string>
     <string name="descriptionSub">Image of sub logo</string>    
+    <string name="descriptionSave">Image of save logo</string>      
+    
     
 </resources>
