@@ -72,7 +72,7 @@ public class Boss extends Enemy{
 
 		
 		setCollisionGroup(EntityType.Boss);
-		setVelocity(0, -500);
+		//setVelocity(0, -500);
 	}
 	
 	/**
