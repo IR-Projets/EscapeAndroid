@@ -6,12 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
 
-public class Enemy {
+public class Enemy implements Comparable{
+	String name;
 	View view;
 	float posX, posY;
 	
-	public Enemy(View view, float f, float g){
+	public Enemy(View view, String name, float f, float g){
 		this.view = view;
+		this.name = name;
 		this.posX = f;
 		this.posY = g;		
 	}
@@ -37,6 +39,12 @@ public class Enemy {
 	    v.draw(c);
 	    v.layout((int)oldX, (int)oldY, (int)oldW, (int)oldH);
 	    return b;
+	}
+
+
+	@Override
+	public int compareTo(Object enemy) {
+		return name.compareTo(((Enemy) enemy).name);
 	}
 
 }

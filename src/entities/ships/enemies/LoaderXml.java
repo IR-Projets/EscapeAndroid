@@ -355,6 +355,10 @@ public class LoaderXml{
 	 * @return - the list of EnemyDef which contains all data for launch the creation of enemies
 	 */
 	public List<EnemyDef> getEnemysFromXml(String filename) {
+		return getEnemysFromXml(filename, true);
+	}
+	
+	public List<EnemyDef> getEnemysFromXml(String filename, boolean inJar) {
 
 		EnemyHandler eh = new EnemyHandler();
 		List<EnemyDef> listEnemies = new LinkedList<EnemyDef>();
@@ -363,7 +367,11 @@ public class LoaderXml{
 			//factory.setValidating(true);
 			SAXParser parser = factory.newSAXParser();
 
-			parser.parse(Ressources.getFile(filename), eh);
+			if(inJar)
+				parser.parse(Ressources.getFile(filename), eh);
+			else
+				parser.parse(MainActivity.get().getApplicationContext().getFileStreamPath(filename), eh);
+			
 		} catch (ParserConfigurationException pce) {
 			System.err.println("An error occured during parsing");
 			System.exit(1);

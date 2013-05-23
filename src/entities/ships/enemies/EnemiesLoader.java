@@ -46,9 +46,13 @@ public class EnemiesLoader {
 	 * @param entities - class which represents our world
 	 * @param filename - the location of the XML file to load
 	 */
-	public EnemiesLoader(Entities entities, String filename) {
+	public EnemiesLoader(Entities entities, String filename){
+		this(entities, filename, true);
+	}
+	
+	public EnemiesLoader(Entities entities, String filename, boolean fromJar) {
 		loop=step=0;
-		enemysDef = new LoaderXml().getEnemysFromXml(filename);
+		enemysDef = new LoaderXml().getEnemysFromXml(filename, fromJar);
 		shipFactory = new ShipFactory(entities);
 	}
 

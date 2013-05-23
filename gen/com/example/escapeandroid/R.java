@@ -98,28 +98,31 @@ public final class R {
         public static final int moins=0x7f020047;
         public static final int moon=0x7f020048;
         public static final int plus=0x7f020049;
-        public static final int shiboleet=0x7f02004a;
-        public static final int ship=0x7f02004b;
-        public static final int ship_big=0x7f02004c;
-        public static final int ship_original=0x7f02004d;
-        public static final int shuriken=0x7f02004e;
-        public static final int sirud1=0x7f02004f;
-        public static final int sirud2=0x7f020050;
-        public static final int solar_system=0x7f020051;
-        public static final int xaroff1=0x7f020052;
-        public static final int xaroff2=0x7f020053;
+        public static final int save=0x7f02004a;
+        public static final int shiboleet=0x7f02004b;
+        public static final int ship=0x7f02004c;
+        public static final int ship_big=0x7f02004d;
+        public static final int ship_original=0x7f02004e;
+        public static final int shuriken=0x7f02004f;
+        public static final int sirud1=0x7f020050;
+        public static final int sirud2=0x7f020051;
+        public static final int solar_system=0x7f020052;
+        public static final int xaroff1=0x7f020053;
+        public static final int xaroff2=0x7f020054;
     }
     public static final class id {
         public static final int Button2=0x7f09000b;
-        public static final int action_settings=0x7f090017;
-        public static final int add_button=0x7f09000f;
+        public static final int LinearLayout1=0x7f090014;
+        public static final int RelativeLayout1=0x7f09001c;
+        public static final int action_settings=0x7f090020;
+        public static final int add_button=0x7f090016;
         public static final int button1=0x7f09000a;
-        public static final int credits_button=0x7f090016;
+        public static final int credits_button=0x7f09001f;
         public static final int defaultLayout=0x7f09000c;
-        public static final int edit_button=0x7f090015;
+        public static final int edit_button=0x7f09001e;
         public static final int editorGraphicView=0x7f090000;
-        public static final int english_button=0x7f090013;
-        public static final int french_button=0x7f090011;
+        public static final int english_button=0x7f09001b;
+        public static final int french_button=0x7f090019;
         public static final int horizontalScrollView1=0x7f090001;
         public static final int imageView1=0x7f090002;
         public static final int imageView2=0x7f090003;
@@ -129,11 +132,18 @@ public final class R {
         public static final int imageView6=0x7f090007;
         public static final int imageView7=0x7f090008;
         public static final int imageView8=0x7f090009;
-        public static final int layout_flag_english=0x7f090012;
-        public static final int layout_flag_french=0x7f090010;
+        public static final int layout_flag_english=0x7f09001a;
+        public static final int layout_flag_french=0x7f090018;
+        public static final int level1=0x7f09000e;
+        public static final int level2=0x7f09000f;
+        public static final int level3=0x7f090010;
+        public static final int level4=0x7f090011;
+        public static final int level5=0x7f090012;
+        public static final int level6=0x7f090013;
         public static final int levels_layout_top=0x7f09000d;
-        public static final int play_button=0x7f090014;
-        public static final int sub_button=0x7f09000e;
+        public static final int play_button=0x7f09001d;
+        public static final int save_button=0x7f090017;
+        public static final int sub_button=0x7f090015;
     }
     public static final class layout {
         public static final int activity_editor=0x7f030000;
@@ -149,10 +159,13 @@ public final class R {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
         public static final int credits_button=0x7f060005;
-        public static final int descriptionAddition=0x7f060007;
-        public static final int descriptionSub=0x7f060008;
+        public static final int descriptionAddition=0x7f060009;
+        public static final int descriptionSave=0x7f06000b;
+        public static final int descriptionSub=0x7f06000a;
         public static final int edit_button=0x7f060004;
         public static final int hello_world=0x7f060002;
+        public static final int level=0x7f060008;
+        public static final int level1=0x7f060007;
         public static final int levels=0x7f060006;
         public static final int play_button=0x7f060003;
     }

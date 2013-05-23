@@ -31,7 +31,7 @@ public class EditorGraphicsView extends View implements OnDragListener{
 	float lastPoint;
 	
 	float vaissX, vaissY;
-	List<Enemy> vaisseaux;
+	public static List<Enemy> vaisseaux;
 	
 	
 	
@@ -111,7 +111,7 @@ public class EditorGraphicsView extends View implements OnDragListener{
 
            case DragEvent.ACTION_DROP:
         	   View view = (View) event.getLocalState();
-        	   vaisseaux.add(new Enemy(view, event.getX(), event.getY() + map.getY()));
+        	   vaisseaux.add(new Enemy(view, view.getContentDescription().toString(), event.getX(), event.getY() + map.getY()));
         	   invalidate();
         	   break;
 

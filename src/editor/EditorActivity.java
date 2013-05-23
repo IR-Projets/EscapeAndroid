@@ -1,8 +1,20 @@
 package editor;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
+import maps.Earth;
 import maps.EditorMap;
 import maps.Jupiter;
 import maps.Map;
@@ -21,6 +33,7 @@ import game.Variables;
 
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
@@ -41,7 +54,7 @@ import android.widget.LinearLayout;
 
 public class EditorActivity extends Activity{
 	
-	private String scriptFile = "scripts/EnemiesJupiter.xml";
+	private String scriptFile = "EnemyNew.xml";
 	public static Environnement environnement;
 	
 	
@@ -69,12 +82,12 @@ public class EditorActivity extends Activity{
 		world.setAllowSleep(false);
 		
 		Entities entities = new Entities(world);
-		EnemiesLoader ennemyloader = new EnemiesLoader(entities, scriptFile);//xml of ennemies of the moon
+		EnemiesLoader ennemyloader = new EnemiesLoader(entities, scriptFile, false);//xml of ennemies of the moon
 
 		ShipFactory factory = new ShipFactory(entities);
 		Player playerShip = factory.createPlayer();
 
-		Map map = new Jupiter();
+		Map map = new Earth();
 		environnement = new Environnement(entities, map, playerShip, ennemyloader);		
 		
 		GameGraphicsView.game = null;
@@ -83,10 +96,75 @@ public class EditorActivity extends Activity{
 		startActivity(intent);
 	}
 	
-	public void save(View view){
-		
+	public void save(View view) {
+		FileOutputStream fOut = null;
+		OutputStreamWriter osw = null;
+
+		try {
+			fOut = getBaseContext().openFileOutput(scriptFile, MODE_PRIVATE);
+			osw = new OutputStreamWriter(fOut);
+			
+			String head = "<?xml version=\"1.0\" encoding=\"UTF-8\"?> <enemies>";
+			osw.write(head);
+			
+			//Liste des actions (en XML) d'un enemy (à placer a la fin d'une liste d'apparition)
+			String action = "<actions repeattime=\"6\">	<move beg=\"1\" end=\"2\">	<angle>270</angle>	<velocity>100</velocity>  </move> <move beg=\"3\" end=\"4\"> <angle>300</angle> <velocity>100</velocity>	</move>	<move beg=\"5\" end=\"6\">	<angle>240</angle>	<velocity>100</velocity>	</move>	<fire beg=\"1\" end=\"2\">	<name>Fireball</name>	<angle>265</angle>	<velocity>200</velocity> </fire> <fire beg=\"5\" end=\"6\">	<name>Shiboleet</name>	<angle>275</angle>	<velocity>200</velocity></fire>	</actions> </enemy>";
+			
+			List<Enemy> enemies = EditorGraphicsView.vaisseaux;
+			Collections.sort(enemies);
+			
+			
+			
+			String first = "";
+			for(Enemy enemy : enemies){
+				String name = enemy.name;
+				/*
+				 * 2 cas:
+				 * _On change d'enemy (On remet les info: id, image et life)
+				 * _On continu avec le même enemy (on change juste sa date d'apparition)
+				 */
+				if(!first.equals(name)){
+					if(first!="")
+						osw.write(action);
+					
+					first = name;
+					String info = "<enemy id=\"" + name + "\"> <life>35</life>	<image>" + name + "</image>";
+					osw.write(info);
+				}
+				
+				//TODO: time d'apparition (en fonction de Y)
+				//NOTE: posY plus pris en compte...
+				String apparition = " <appear time=\"" + (int)enemy.posY + "\"> <posX>" + (int)enemy.posX + "</posX> <posY>" + (int)enemy.posY + "</posY> </appear>";
+				osw.write(apparition);
+			}				
+			osw.write(action);
+			
+			String boss = "<boss> <life>400</life> <image>boss</image>	<appear time=\"85\"> <posX>150</posX>	<posY>950</posY></appear><actions repeattime=\"10\">	<move beg=\"2\" end=\"3\"> <angle>-90</angle> <velocity>70</velocity></move><move beg=\"4\" end=\"5\">	<angle>0</angle><velocity>50</velocity> </move> <move beg=\"7\" end=\"8\">	<angle>90</angle> <velocity>70</velocity> </move> <move beg=\"9\" end=\"10\"> <angle>180</angle> <velocity>50</velocity> </move> <fire beg=\"4\" end=\"6\"> <name>ShiboleetExtended</name>	<angle>270</angle> <velocity>250</velocity>	</fire>	</actions></boss></enemies>";
+			osw.write(boss);
+			
+			osw.flush();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				osw.close();
+				fOut.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
+	
+	private String readTest() throws IOException{
+		FileInputStream fis = getBaseContext().openFileInput(scriptFile);			  
+		int content;
+		String text = "";
+		while ((content = fis.read()) != -1) {
+			text += (char) content;
+		}
+		return text;
+	}
 	
 	
 	/*
