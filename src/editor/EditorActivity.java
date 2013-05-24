@@ -52,6 +52,7 @@ import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class EditorActivity extends Activity{
 	
@@ -116,7 +117,7 @@ public class EditorActivity extends Activity{
 		EditorGraphicsView.get().invalidate();
 	}
 	
-	public void play(View view) throws Exception{
+	public void play(View view) throws Exception{		
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
@@ -130,7 +131,14 @@ public class EditorActivity extends Activity{
 		world.setAllowSleep(false);
 		
 		Entities entities = new Entities(world);
-		EnemiesLoader ennemyloader = new EnemiesLoader(entities, scriptFile, false);//xml of ennemies of the moon
+		EnemiesLoader ennemyloader;
+		try{
+			ennemyloader = new EnemiesLoader(entities, scriptFile, false);//xml of ennemies of the moon
+		}
+		catch(Exception e){
+			Toast.makeText(this, "Aucun ennemis n'a été sauvegardé", Toast.LENGTH_LONG);
+			return;
+		}
 
 		ShipFactory factory = new ShipFactory(entities);
 		Player playerShip = factory.createPlayer();
