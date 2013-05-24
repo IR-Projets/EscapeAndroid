@@ -197,7 +197,8 @@ public class EditorActivity extends Activity{
 			}				
 			osw.write(action);
 			
-			String boss = "<boss> <life>400</life> <image>boss</image>	<appear time=\"85\"> <posX>150</posX>	<posY>950</posY></appear><actions repeattime=\"10\">	<move beg=\"2\" end=\"3\"> <angle>-90</angle> <velocity>70</velocity></move><move beg=\"4\" end=\"5\">	<angle>0</angle><velocity>50</velocity> </move> <move beg=\"7\" end=\"8\">	<angle>90</angle> <velocity>70</velocity> </move> <move beg=\"9\" end=\"10\"> <angle>180</angle> <velocity>50</velocity> </move> <fire beg=\"4\" end=\"6\"> <name>ShiboleetExtended</name>	<angle>270</angle> <velocity>250</velocity>	</fire>	</actions></boss></enemies>";
+			int appearTime = (int)(EditorGraphicsView.map.getHeight() - Variables.SCREEN_HEIGHT )/15;
+			String boss = "<boss> <life>400</life> <image>boss</image>	<appear time=\"" + appearTime + "\"> <posX>150</posX>	<posY>950</posY></appear><actions repeattime=\"10\">	<move beg=\"2\" end=\"3\"> <angle>-90</angle> <velocity>70</velocity></move><move beg=\"4\" end=\"5\">	<angle>0</angle><velocity>50</velocity> </move> <move beg=\"7\" end=\"8\">	<angle>90</angle> <velocity>70</velocity> </move> <move beg=\"9\" end=\"10\"> <angle>180</angle> <velocity>50</velocity> </move> <fire beg=\"4\" end=\"6\"> <name>ShiboleetExtended</name>	<angle>270</angle> <velocity>250</velocity>	</fire>	</actions></boss></enemies>";
 			osw.write(boss);
 			
 			osw.flush();

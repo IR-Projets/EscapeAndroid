@@ -82,7 +82,7 @@ public class EnemiesLoader {
 				if(step > enemyLoad.getTime()){
 					Bitmap image = enemyLoad.getImage();
 					if(enemyLoad.isBoss()){
-						shipFactory.createBoss(image, enemyLoad.getX(), Variables.SCREEN_HEIGHT-image.getHeight()/*enemyLoad.getY()*/, enemyLoad.getLife(), enemyLoad.getBehavior());
+						shipFactory.createBoss(image, 20, Variables.SCREEN_HEIGHT/*-image.getHeight()enemyLoad.getY()*/, enemyLoad.getLife(), enemyLoad.getBehavior());
 					}
 					else
 						shipFactory.createEnnemy(image, enemyLoad.getX(), Variables.SCREEN_HEIGHT-image.getHeight(), enemyLoad.getLife(), enemyLoad.getBehavior());
