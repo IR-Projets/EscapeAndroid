@@ -51,6 +51,7 @@ public class LoaderXml{
 	private enum EnemyType{Enemy, Boss};
 
 	private class EnemyProperties{
+		public String name;
 		public Bitmap image=null;
 		public int life=-1;
 		public int repeatTime=-1;
@@ -253,6 +254,7 @@ public class LoaderXml{
 					if(drawableResourceId==0)
 						throw new Exception();
 					enemyPropertiesTmp.image = Ressources.getImage(drawableResourceId);
+					enemyPropertiesTmp.name = sb.toString();
 				} catch (Exception e){
 					throw new SAXException(qName+" tag error: " + sb.toString() + " Not found");
 				}
@@ -353,12 +355,15 @@ public class LoaderXml{
 	 * Return a list of EnemyDef which contains all data for launch the creation of enemies
 	 * @param filename - the emplacement of the XML file to load into our data
 	 * @return - the list of EnemyDef which contains all data for launch the creation of enemies
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 * @throws IOException 
 	 */
-	public List<EnemyDef> getEnemysFromXml(String filename) {
+	public List<EnemyDef> getEnemysFromXml(String filename) throws IOException, ParserConfigurationException, SAXException {
 		return getEnemysFromXml(filename, true);
 	}
 	
-	public List<EnemyDef> getEnemysFromXml(String filename, boolean inJar) {
+	public List<EnemyDef> getEnemysFromXml(String filename, boolean inJar) throws IOException, ParserConfigurationException, SAXException {
 
 		EnemyHandler eh = new EnemyHandler();
 		List<EnemyDef> listEnemies = new LinkedList<EnemyDef>();
@@ -374,13 +379,16 @@ public class LoaderXml{
 			
 		} catch (ParserConfigurationException pce) {
 			System.err.println("An error occured during parsing");
-			System.exit(1);
+			throw pce;
+			//System.exit(1);
 		} catch (SAXException se){
 			System.err.println("Parsing error : "+se.getMessage());
-			System.exit(1);
+			throw se;
+			//System.exit(1);
 		}  catch (IOException ioe) {
 			System.err.println("Read/Write error : "+filename);
-			System.exit(1);
+			throw ioe;
+			//System.exit(1);
 		}
 		for(EnemyProperties enemyProperties : eh.listEnemyProperties){
 			for(AppearTime appearTime : enemyProperties.appearListTmp){
@@ -390,7 +398,7 @@ public class LoaderXml{
 					isBoss=true;
 				else
 					isBoss=false;
-				listEnemies.add(new EnemyDef(enemyProperties.image,  enemyBehavior, (int)appearTime.position.x, (int)appearTime.position.y, enemyProperties.life, appearTime.time, isBoss));
+				listEnemies.add(new EnemyDef(enemyProperties.name, enemyProperties.image,  enemyBehavior, (int)appearTime.position.x, (int)appearTime.position.y, enemyProperties.life, appearTime.time, isBoss));
 			}
 		}
 		return listEnemies;

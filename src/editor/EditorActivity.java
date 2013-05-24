@@ -25,6 +25,7 @@ import com.example.escapeandroid.R;
 import entities.Entities;
 import entities.ships.Player;
 import entities.ships.enemies.EnemiesLoader;
+import entities.ships.enemies.EnemyDef;
 import factories.ShipFactory;
 import fr.umlv.android.GameActivity;
 import fr.umlv.android.GameGraphicsView;
@@ -84,9 +85,33 @@ public class EditorActivity extends Activity{
 			EditorGraphicsView.mapDrawable = R.drawable.moon;
 		}
 		EditorGraphicsView.mapChanged = true;
+		
+		//OMG... I DONT KNOW WHAT I'M DOING... (BUT THE SOUND IS GOOD)
+		//Bon en vrai on va utiliser le "ennemyLoader" pour connaitre la position des Enemy
+		try {
+			World world = new World(new Vec2(Variables.WORLD_GRAVITY_X, Variables.WORLD_GRAVITY_Y), false);
+			world.setAllowSleep(false);
+			Entities entities = new Entities(world);
+			EnemiesLoader ennemyloader = new EnemiesLoader(entities, scriptFile, false);// xml of ennemies of the moon
+
+			for (EnemyDef enemyDef : ennemyloader.enemysDef) {
+				if (!enemyDef.isBoss())
+					EditorGraphicsView.vaisseaux.add(new Enemy(enemyDef.image,
+							enemyDef.name, enemyDef.x, enemyDef.y));
+			}
+		} catch (Exception e) {	
+			EditorGraphicsView.vaisseaux.clear();
+		} // Si sa plante ON S'EN FOU (on charge pas les ennemies)
 	}
 	
-	public void play(View view){
+	
+	
+	public void clean(View view){
+		EditorGraphicsView.vaisseaux.clear();
+		EditorGraphicsView.get().invalidate();
+	}
+	
+	public void play(View view) throws Exception{
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
@@ -211,19 +236,11 @@ public class EditorActivity extends Activity{
 		ImageView i2 = (ImageView) findViewById(R.id.imageView2);
 		ImageView i3 = (ImageView) findViewById(R.id.imageView3);
 		ImageView i4 = (ImageView) findViewById(R.id.imageView4);
-		ImageView i5 = (ImageView) findViewById(R.id.imageView5);
-		ImageView i6 = (ImageView) findViewById(R.id.imageView6);
-		ImageView i7 = (ImageView) findViewById(R.id.imageView7);
-		ImageView i8 = (ImageView) findViewById(R.id.imageView8);
 		
 		i1.setOnTouchListener(touchListener);
 		i2.setOnTouchListener(touchListener);
 		i3.setOnTouchListener(touchListener);
 		i4.setOnTouchListener(touchListener);
-		i5.setOnTouchListener(touchListener);
-		i6.setOnTouchListener(touchListener);
-		i7.setOnTouchListener(touchListener);
-		i8.setOnTouchListener(touchListener);
 	}
 	
 	

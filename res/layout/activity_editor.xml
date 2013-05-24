@@ -47,31 +47,8 @@
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ship" />
-            
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/joueur" />
-            
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/enemy1" />
-            
-            <ImageView
-                android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/enemy2" />
-            
-            <ImageView
-                android:id="@+id/imageView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/enemy3" />
+                android:contentDescription="enemy4"
+                android:src="@drawable/enemy4" />
             
         </LinearLayout>
     </HorizontalScrollView>
@@ -82,12 +59,20 @@
         android:orientation="horizontal" >
 
         <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="clean"
+            android:text="@string/clean" />
+
+        <Button
             android:id="@+id/button1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="save"
-            android:text="Save" />
+            android:text="@string/save" />
 
         <Button
             android:id="@+id/Button2"
@@ -95,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="play"
-            android:text="Play" />
+            android:text="@string/play" />
 
     </LinearLayout>
 

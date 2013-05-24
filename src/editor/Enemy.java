@@ -9,6 +9,7 @@ import android.view.View;
 public class Enemy implements Comparable{
 	String name;
 	View view;
+	Bitmap bitmap;
 	float posX, posY;
 	
 	public Enemy(View view, String name, float f, float g){
@@ -18,9 +19,20 @@ public class Enemy implements Comparable{
 		this.posY = g;		
 	}
 	
+	public Enemy(Bitmap bitmap, String name, float f, float g){
+		this.bitmap = bitmap;
+		this.name = name;
+		this.posX = f;
+		this.posY = g;		
+	}
+	
 	
 	void draw(Canvas canvas, float offsetY){
-		Bitmap image = loadBitmapFromView(view);
+		Bitmap image;
+		if(bitmap==null)
+			image = loadBitmapFromView(view);
+		else
+			image = bitmap;
 		canvas.drawBitmap(image,
 				new Rect(0, 0, image.getWidth(), image.getHeight()),
 				new Rect((int)posX - image.getWidth()/2, (int)(posY - image.getHeight()/2 - offsetY), (int)posX + image.getWidth()/2, (int)(posY + image.getHeight()/2 - offsetY)),

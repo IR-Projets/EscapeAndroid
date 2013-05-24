@@ -26,8 +26,10 @@ import android.view.View.OnDragListener;
 
 public class EditorGraphicsView extends View implements OnDragListener{
 	
+	public static EditorGraphicsView instance;
+	
 	public static EditorMap map;
-	public static int mapDrawable;
+	public static int mapDrawable = R.drawable.earth;
 	public static boolean mapChanged;
 	
 	float scrollY;
@@ -36,11 +38,14 @@ public class EditorGraphicsView extends View implements OnDragListener{
 	float vaissX, vaissY;
 	public static List<Enemy> vaisseaux;
 	
-	
+	public static EditorGraphicsView get(){
+		return instance;
+	}
 	
 	public EditorGraphicsView(Context context, AttributeSet attrs) throws IOException 
 	{
 		super(context, attrs);
+		instance = this;
 		mapChanged = false;
 		this.setOnDragListener(this);
 		vaisseaux = new LinkedList<Enemy>();

@@ -1,7 +1,12 @@
 package entities.ships.enemies;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
+
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import android.graphics.Bitmap;
 
@@ -38,19 +43,22 @@ public class EnemiesLoader {
 	private int loop, step;//local variables uses for launch the creation during all the game
 
 	
-	private final List<EnemyDef> enemysDef;
+	public final List<EnemyDef> enemysDef;
 	private final ShipFactory shipFactory;
 
 	/**
 	 * Default constructor, which make the EnemiesLoader associate with an XML files which contains EnemyDef definition.
 	 * @param entities - class which represents our world
 	 * @param filename - the location of the XML file to load
+	 * @throws SAXException 
+	 * @throws ParserConfigurationException 
+	 * @throws IOException 
 	 */
-	public EnemiesLoader(Entities entities, String filename){
+	public EnemiesLoader(Entities entities, String filename) throws Exception{
 		this(entities, filename, true);
 	}
 	
-	public EnemiesLoader(Entities entities, String filename, boolean fromJar) {
+	public EnemiesLoader(Entities entities, String filename, boolean fromJar) throws Exception {
 		loop=step=0;
 		enemysDef = new LoaderXml().getEnemysFromXml(filename, fromJar);
 		shipFactory = new ShipFactory(entities);

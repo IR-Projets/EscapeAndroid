@@ -59,8 +59,9 @@ public class EnvironnementFactory {
 	 * Create the environment earth, associated with a world Jbox.
 	 * @param world - the world associated in Jbox
 	 * @return the environment earth
+	 * @throws Exception 
 	 */
-	private static Environnement Earth(World world){
+	private static Environnement Earth(World world) throws Exception{
 		Entities entities = new Entities(world);
 		EnemiesLoader ennemyloader = new EnemiesLoader(entities, "scripts/EnemiesEarth.xml");//xml of ennemies of the earth
 
@@ -76,8 +77,9 @@ public class EnvironnementFactory {
 	 * Create the environment moon, associated with a world Jbox.
 	 * @param world - the world associated in Jbox
 	 * @return the environment earth
+	 * @throws Exception 
 	 */
-	private static Environnement Moon(World world){
+	private static Environnement Moon(World world) throws Exception{
 		Entities entities = new Entities(world);
 		EnemiesLoader ennemyloader = new EnemiesLoader(entities, "scripts/EnemiesMoon.xml");//xml of ennemies of the moon
 
@@ -93,8 +95,9 @@ public class EnvironnementFactory {
 	 * Create the environment jupiter, associated with a world Jbox.
 	 * @param world - the world associated in Jbox
 	 * @return the environment earth
+	 * @throws Exception 
 	 */
-	private static Environnement Jupiter(World world){
+	private static Environnement Jupiter(World world) throws Exception{
 		Entities entities = new Entities(world);
 		EnemiesLoader ennemyloader = new EnemiesLoader(entities, "scripts/EnemiesJupiter.xml");//xml of ennemies of the jupiter
 
@@ -111,8 +114,9 @@ public class EnvironnementFactory {
 	 * @param world - the world associated in Jbox
 	 * @param level - the level to create
 	 * @return the environment initialize with the corresponding world and level
+	 * @throws Exception 
 	 */
-	public static Environnement factory(World world, Level level){
+	public static Environnement factory(World world, Level level) throws Exception{
 		if(world==null){
 			world = new World(new Vec2(Variables.WORLD_GRAVITY_X, Variables.WORLD_GRAVITY_Y), DO_SLEEP);
 		}
@@ -136,8 +140,9 @@ public class EnvironnementFactory {
 	 * Default factory for the JBox2d Test.
 	 * @param level the level to create
 	 * @return the Environnement init with the corresponding level
+	 * @throws Exception 
 	 */
-	public static Environnement factory(Level level){
+	public static Environnement factory(Level level) throws Exception{
 		return factory(null, level);
 	}
 

@@ -28,9 +28,10 @@ import android.graphics.Bitmap;
  *
  */
 public class EnemyDef {
-	private final Bitmap image;
+	public final String name;
+	public final Bitmap image;
 	private final EnemyBehavior behavior;
-	private final int x, y, life;
+	public final int x, y, life;
 	private final int time;
 	private final boolean isBoss;
 
@@ -44,7 +45,8 @@ public class EnemyDef {
 	 * @param time - the time before the enemy appear
 	 * @param isBoss - a boolean for knows if the enemy is a boss
 	 */
-	public EnemyDef(Bitmap image, EnemyBehavior behavior, int x, int y, int life, int time, boolean isBoss){
+	public EnemyDef(String name, Bitmap image, EnemyBehavior behavior, int x, int y, int life, int time, boolean isBoss){
+		this.name = name;
 		this.image = image;
 		this.behavior = behavior;
 		this.x = x;

@@ -38,7 +38,13 @@ public class GameGraphicsView extends View {
 		initGame();
 		
 		if(game != null){
-			game.run(canvas);
+			try{
+				game.run(canvas);
+			}catch(Exception e){
+				e.printStackTrace();
+				Activity host = (Activity)getContext();
+				host.finish();
+			}
 			if(game.finished){
 				game = null;
 				EditorActivity.environnement = null;
@@ -56,9 +62,10 @@ public class GameGraphicsView extends View {
 					game = new Game(EditorActivity.environnement);
 				else
 					game = new Game();
-			} catch (IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				System.exit(0);
+				Activity host = (Activity)getContext();
+				host.finish();
 			}
 			invalidate();
 		}

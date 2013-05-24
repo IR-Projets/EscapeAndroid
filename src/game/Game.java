@@ -106,9 +106,9 @@ public class Game implements EnvironnementListener{
 
 	/**
 	 * Initialise our game.
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public Game() throws IOException{		
+	public Game() throws Exception{		
 		this.level = Level.Jupiter;		
 		environnement = EnvironnementFactory.factory(level);
 		environnement.addListener(this);
@@ -149,6 +149,7 @@ public class Game implements EnvironnementListener{
 		};
 	}
 
+	Exception exc = null;
 	@Override
 	public void stateChanged(GameState state) {
 		switch(state){
@@ -174,8 +175,12 @@ public class Game implements EnvironnementListener{
 				break;
 			}	
 			environnement.removeListener(this);
-			environnement = EnvironnementFactory.factory(level);
-			environnement.addListener(this);
+			try{
+				environnement = EnvironnementFactory.factory(level);
+				environnement.addListener(this);
+			}catch(Exception e){
+				exc = e;
+			}
 			break;
 		}
 
@@ -183,8 +188,12 @@ public class Game implements EnvironnementListener{
 	/**
 	 * Launch the game by render it.
 	 * @param graphics - the graphics to print on
+	 * @throws Exception 
 	 */
-	public void run(Canvas canvas) {				
+	public void run(Canvas canvas) throws Exception {	
+		if(exc != null)
+			throw exc;
+		
 		//bufferGraphics.clearRect(0,0,Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT); 
 		//bufferGraphics.setBackground(new Color(0));			
 		if(story != null && story.isLoaded()){
