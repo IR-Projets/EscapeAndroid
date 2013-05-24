@@ -15,12 +15,5 @@ public class GameActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_game);
-	}
-	
-	@Override
-	public void finish() {
-		// TODO Auto-generated method stub
-		super.finish();
-	}
-	
+	}	
 }

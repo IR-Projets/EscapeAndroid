@@ -49,7 +49,8 @@ public class LevelsActivity extends Activity{
 
 	public void click(View v){
 		Button myButton = (Button) v;
-		Intent intent = new Intent(this, EditorActivity.class);
+		//Intent intent = new Intent(this, EditorActivity.class);
+		Intent intent = new Intent(this, SelectFile.class);
 		startActivity(intent);
 	}
 

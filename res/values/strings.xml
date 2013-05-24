@@ -11,8 +11,22 @@
     <string name="level1">Level 1</string>
     <string name="level">Level</string>
     <string name="descriptionAddition">Image of addition logo</string>
-    <string name="descriptionSub">Image of sub logo</string>    
-    <string name="descriptionSave">Image of save logo</string>      
+    <string name="descriptionSub">Image of sub logo</string>
+    <string name="descriptionSave">Image of save logo</string>
+    <string name="title_activity_select_file">SelectFile</string>
+
+    <string name="existing_map">From existing map</string>
+    <string name="ok">Ok</string>
+	<string name="from_file">Or from a file (need a file selector)</string>
+	<string name="select_file">Select file</string>
     
     
+    <string-array name="planets_array">
+        <item>Earth</item>
+        <item>Jupiter</item>
+        <item>Moon</item>
+    </string-array>
+
+        
+
 </resources>

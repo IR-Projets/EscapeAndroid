@@ -42,8 +42,6 @@ public class GameGraphicsView extends View {
 			if(game.finished){
 				game = null;
 				EditorActivity.environnement = null;
-				//System.exit(0);
-				//setVisibility(View.GONE);
 				Activity host = (Activity)getContext();
 				host.finish();				
 			}

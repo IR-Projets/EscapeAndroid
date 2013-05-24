@@ -56,7 +56,7 @@ public class EditorActivity extends Activity{
 	
 	private String scriptFile = "EnemyNew.xml";
 	public static Environnement environnement;
-	
+	public static Map map;
 	
 	
 	@Override
@@ -64,9 +64,27 @@ public class EditorActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_editor);
+		setupMap();
 		setupViews();
 	}	
 	
+	private void setupMap(){
+		Intent intent= getIntent();
+		String mapName = intent.getStringExtra("map");
+		if(mapName.equals("Earth")){
+			map = new Earth();
+			EditorGraphicsView.mapDrawable = R.drawable.earth;
+		}
+		if(mapName.equals("Jupiter")){
+			map = new Jupiter();
+			EditorGraphicsView.mapDrawable = R.drawable.jupiter;
+		}
+		if(mapName.equals("Moon")){
+			map = new Moon();
+			EditorGraphicsView.mapDrawable = R.drawable.moon;
+		}
+		EditorGraphicsView.mapChanged = true;
+	}
 	
 	public void play(View view){
 		Display display = getWindowManager().getDefaultDisplay();
@@ -86,8 +104,7 @@ public class EditorActivity extends Activity{
 
 		ShipFactory factory = new ShipFactory(entities);
 		Player playerShip = factory.createPlayer();
-
-		Map map = new Jupiter();
+		
 		environnement = new Environnement(entities, map, playerShip, ennemyloader);		
 		
 		GameGraphicsView.game = null;

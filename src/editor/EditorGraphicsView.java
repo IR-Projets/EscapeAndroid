@@ -27,6 +27,9 @@ import android.view.View.OnDragListener;
 public class EditorGraphicsView extends View implements OnDragListener{
 	
 	public static EditorMap map;
+	public static int mapDrawable;
+	public static boolean mapChanged;
+	
 	float scrollY;
 	float lastPoint;
 	
@@ -38,6 +41,7 @@ public class EditorGraphicsView extends View implements OnDragListener{
 	public EditorGraphicsView(Context context, AttributeSet attrs) throws IOException 
 	{
 		super(context, attrs);
+		mapChanged = false;
 		this.setOnDragListener(this);
 		vaisseaux = new LinkedList<Enemy>();
 		//setupViews();
@@ -50,18 +54,20 @@ public class EditorGraphicsView extends View implements OnDragListener{
 		Variables.SCREEN_WIDTH = MeasureSpec.getSize(widthMeasureSpec);
 		Variables.SCREEN_HEIGHT = MeasureSpec.getSize(heightMeasureSpec);
 		
-		if(map == null){
-			map = new EditorMap(BitmapFactory.decodeResource(getResources(), R.drawable.jupiter));
-			invalidate();
-		}
+		mapChanged = true;
 	}
-	
-	
 	
 	@Override
 	protected void onDraw(Canvas canvas) 
 	{
 		super.onDraw(canvas);
+		
+		if(mapChanged == true){
+			mapChanged = false;
+			map = new EditorMap(BitmapFactory.decodeResource(getResources(), mapDrawable));
+			invalidate();
+		}
+		
 		map.render(canvas);
 		
 		for(Enemy enemy : vaisseaux){

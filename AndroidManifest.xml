@@ -18,12 +18,17 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="editor.EditorActivity"/>
-        <activity android:name="editor.LevelsActivity"/>
-        <activity android:name="fr.umlv.android.GameActivity"/>
+        <activity android:name="editor.EditorActivity" />
+        <activity android:name="editor.LevelsActivity" />
+        <activity android:name="fr.umlv.android.GameActivity" />
+        <activity
+            android:name="editor.SelectFile"
+            android:label="@string/title_activity_select_file" >
+        </activity>
     </application>
 
 </manifest>
