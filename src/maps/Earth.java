@@ -43,7 +43,7 @@ public class Earth extends Map {
 	 * Default constructor.
 	 */
 	public Earth(){
-		super(Ressources.getImage(R.drawable.earth), 0.2f);
+		super(Ressources.getImage(R.drawable.earth, 1), 0.2f);
 		loop=0;
 		rand = new Random();
 	}

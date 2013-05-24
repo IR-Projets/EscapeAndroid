@@ -73,6 +73,8 @@ public class MainActivity extends Activity {
 		play_button.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				GameGraphicsView.game = null;
+				EditorActivity.environnement = null;
 				launchGame();	
 			}
 		});

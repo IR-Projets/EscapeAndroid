@@ -6,6 +6,7 @@ import editor.EditorActivity;
 
 import game.Game;
 import game.Variables;
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BlurMaskFilter;
@@ -40,7 +41,11 @@ public class GameGraphicsView extends View {
 			game.run(canvas);
 			if(game.finished){
 				game = null;
-				System.exit(0);
+				EditorActivity.environnement = null;
+				//System.exit(0);
+				//setVisibility(View.GONE);
+				Activity host = (Activity)getContext();
+				host.finish();				
 			}
 			invalidate();	
 		}

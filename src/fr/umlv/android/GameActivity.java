@@ -5,6 +5,8 @@ import android.os.Bundle;
 
 import com.example.escapeandroid.R;
 
+import editor.EditorActivity;
+
 public class GameActivity extends Activity{
 
 	
@@ -15,5 +17,10 @@ public class GameActivity extends Activity{
 		setContentView(R.layout.activity_game);
 	}
 	
+	@Override
+	public void finish() {
+		// TODO Auto-generated method stub
+		super.finish();
+	}
 	
 }

@@ -32,7 +32,7 @@ import game.Ressources;
 public class Moon extends Map{
 
 	public Moon() {
-		super(Ressources.getImage(R.drawable.moon), 0.2f);
+		super(Ressources.getImage(R.drawable.moon, 1), 0.2f);
 		// TODO Auto-generated constructor stub
 	}
 

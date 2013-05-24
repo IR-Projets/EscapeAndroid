@@ -22,6 +22,10 @@ public class EditorMap extends Map{
 		return posY;
 	}
 	
+	public int getHeight(){
+		return ground.getHeight();
+	}
+	
 	/**
 	 * Useless....
 	 */

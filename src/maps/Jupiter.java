@@ -44,7 +44,7 @@ public class Jupiter extends Map{
 	 * Default constuctor.
 	 */
 	public Jupiter() {
-		super(Ressources.getImage(R.drawable.jupiter), 0.2f);
+		super(Ressources.getImage(R.drawable.jupiter, 1), 0.2f);
 		rand = new Random();
 		loop=0;
 	}

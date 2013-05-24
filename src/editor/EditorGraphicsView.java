@@ -26,7 +26,7 @@ import android.view.View.OnDragListener;
 
 public class EditorGraphicsView extends View implements OnDragListener{
 	
-	EditorMap map;
+	public static EditorMap map;
 	float scrollY;
 	float lastPoint;
 	
@@ -51,7 +51,7 @@ public class EditorGraphicsView extends View implements OnDragListener{
 		Variables.SCREEN_HEIGHT = MeasureSpec.getSize(heightMeasureSpec);
 		
 		if(map == null){
-			map = new EditorMap(BitmapFactory.decodeResource(getResources(), R.drawable.earth));
+			map = new EditorMap(BitmapFactory.decodeResource(getResources(), R.drawable.jupiter));
 			invalidate();
 		}
 	}

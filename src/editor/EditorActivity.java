@@ -87,7 +87,7 @@ public class EditorActivity extends Activity{
 		ShipFactory factory = new ShipFactory(entities);
 		Player playerShip = factory.createPlayer();
 
-		Map map = new Earth();
+		Map map = new Jupiter();
 		environnement = new Environnement(entities, map, playerShip, ennemyloader);		
 		
 		GameGraphicsView.game = null;
@@ -134,7 +134,10 @@ public class EditorActivity extends Activity{
 				
 				//TODO: time d'apparition (en fonction de Y)
 				//NOTE: posY plus pris en compte...
-				String apparition = " <appear time=\"" + (int)enemy.posY + "\"> <posX>" + (int)enemy.posX + "</posX> <posY>" + (int)enemy.posY + "</posY> </appear>";
+				int appearTime = (int)(EditorGraphicsView.map.getHeight() - enemy.posY - Variables.SCREEN_HEIGHT )/15;
+				if(appearTime<=0)
+					appearTime = 1;
+				String apparition = " <appear time=\"" + appearTime + "\"> <posX>" + (int)enemy.posX + "</posX> <posY>" + (int)enemy.posY + "</posY> </appear>";
 				osw.write(apparition);
 			}				
 			osw.write(action);
@@ -171,64 +174,6 @@ public class EditorActivity extends Activity{
 	 * FOR DRAG AND DROP IN EDITOR...
 	 */	
 	private void setupViews() {		
-		/*
-		OnDragListener dragListener = new View.OnDragListener() {		
-			Drawable enterShape = getResources().getDrawable(R.drawable.asteroide_small);
-			Drawable normalShape = getResources().getDrawable(R.drawable.asteroide_mid);
-			
-			@Override
-			public boolean onDrag(View v, DragEvent event) {
-				// Defines a variable to store the action type for the incoming event
-		        final int action = event.getAction();
-
-		        // Handles each of the expected events
-		        switch(action) {
-
-		            case DragEvent.ACTION_DRAG_STARTED:
-		                break;
-
-		            case DragEvent.ACTION_DRAG_ENTERED: 
-		            	v.setBackgroundDrawable(enterShape);
-		            	break;
-
-		            case DragEvent.ACTION_DRAG_LOCATION:
-		            	break;
-
-		            case DragEvent.ACTION_DRAG_EXITED:
-		            	v.setBackgroundDrawable(normalShape);
-		            	break;
-
-		           case DragEvent.ACTION_DROP:
-		               // Dropped, reassign View to ViewGroup
-		               View view = (View) event.getLocalState();
-		               ViewGroup owner = (ViewGroup) view.getParent();
-		               owner.removeView(view);
-		               LinearLayout container = (LinearLayout) v;
-		               container.addView(view);
-		               view.setVisibility(View.VISIBLE);
-		        	   break;
-
-		           case DragEvent.ACTION_DRAG_ENDED:
-		        	   v.setBackgroundDrawable(normalShape);
-		        	   break;
-
-		           default:
-		              Log.e("DragDrop","Unknown action type received by OnDragListener.");
-		              break;
-		        }
-				return false;
-			}
-		};
-		
-		View view1 = (View) findViewById(R.id.editorGraphicView);
-		View view2 = (View) findViewById(R.id.horizontalScrollView1);
-		view1.setOnDragListener(dragListener);
-		view2.setOnDragListener(dragListener);
-		
-		*/
-		
-		
-		
 		
 		OnTouchListener touchListener = new View.OnTouchListener() {
 			@Override
