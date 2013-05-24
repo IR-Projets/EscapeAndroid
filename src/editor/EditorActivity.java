@@ -136,7 +136,7 @@ public class EditorActivity extends Activity{
 			ennemyloader = new EnemiesLoader(entities, scriptFile, false);//xml of ennemies of the moon
 		}
 		catch(Exception e){
-			Toast.makeText(this, "Aucun ennemis n'a été sauvegardé", Toast.LENGTH_LONG);
+			Toast.makeText(this, "Aucun ennemis n'a été sauvegardé", Toast.LENGTH_LONG).show();
 			return;
 		}
 
