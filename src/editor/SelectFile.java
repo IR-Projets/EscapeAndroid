@@ -23,11 +23,13 @@ import android.widget.Toast;
 public class SelectFile extends Activity {
 
 	private Spinner spinner;
+	private String level;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_file);
+		level = getIntent().getStringExtra("level");
 		initSpinner();
 	}
 
@@ -50,6 +52,7 @@ public class SelectFile extends Activity {
 		String selectedItem = (String)spinner.getSelectedItem();
 		Intent intent = new Intent(this, EditorActivity.class);
 		intent.putExtra("map", selectedItem);
+		intent.putExtra("level", level);
 		startActivity(intent);
 	}
 	

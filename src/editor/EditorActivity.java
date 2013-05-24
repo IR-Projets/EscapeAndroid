@@ -55,7 +55,7 @@ import android.widget.LinearLayout;
 
 public class EditorActivity extends Activity{
 	
-	private String scriptFile = "EnemyNew.xml";
+	private String scriptFile = "EnemyNew";
 	public static Environnement environnement;
 	public static Map map;
 	
@@ -71,6 +71,11 @@ public class EditorActivity extends Activity{
 	
 	private void setupMap(){
 		Intent intent= getIntent();
+		String level = intent.getStringExtra("level");
+		String[] res = level.split(" ");
+		scriptFile += res[1] + ".xml";
+		
+		
 		String mapName = intent.getStringExtra("map");
 		if(mapName.equals("Earth")){
 			map = new Earth();

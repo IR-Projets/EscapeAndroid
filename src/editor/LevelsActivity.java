@@ -51,6 +51,7 @@ public class LevelsActivity extends Activity{
 		Button myButton = (Button) v;
 		//Intent intent = new Intent(this, EditorActivity.class);
 		Intent intent = new Intent(this, SelectFile.class);
+		intent.putExtra("level", myButton.getText());
 		startActivity(intent);
 	}
 
