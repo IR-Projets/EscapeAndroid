@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <enemies>
-	
-	<enemy id="enemy1">
+	<enemy id="enemy1" map="lol">
 		<life>15</life>
 		<image>enemy1</image>
 
