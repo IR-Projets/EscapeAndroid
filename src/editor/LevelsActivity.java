@@ -118,7 +118,7 @@ public class LevelsActivity extends Activity{
 				envs.add(environnement);
 				
 			} catch (Exception e) {
-				Toast.makeText(this, "Le level " + i + " ne peut pas être chargé", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "Le level " + (i+1) + " ne peut pas être chargé", Toast.LENGTH_LONG).show();
 				return;
 			}
 		}

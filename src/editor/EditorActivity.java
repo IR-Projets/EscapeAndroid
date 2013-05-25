@@ -191,9 +191,10 @@ public class EditorActivity extends Activity{
 				
 				//TODO: time d'apparition (en fonction de Y)
 				//NOTE: posY plus pris en compte...
-				int appearTime = (int)(EditorGraphicsView.map.getHeight() - enemy.posY - Variables.SCREEN_HEIGHT )/15;
+				int appearTime = (int) (EditorGraphicsView.map.getHeight() - enemy.posY )/25;//(int)(EditorGraphicsView.map.getHeight() - enemy.posY - Variables.SCREEN_HEIGHT )/15;
+
 				if(appearTime<=0)
-					appearTime = 1;
+					appearTime = Math.abs(appearTime);
 				String apparition = " <appear time=\"" + appearTime + "\"> <posX>" + (int)enemy.posX + "</posX> <posY>" + (int)enemy.posY + "</posY> </appear>";
 				osw.write(apparition);
 			}				
