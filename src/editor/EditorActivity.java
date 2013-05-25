@@ -59,6 +59,8 @@ public class EditorActivity extends Activity{
 	private String scriptFile = "EnemyNew";
 	public static Environnement environnement;
 	public static Map map;
+	public String mapName;
+	public static int lvl;
 	
 	
 	@Override
@@ -75,9 +77,9 @@ public class EditorActivity extends Activity{
 		String level = intent.getStringExtra("level");
 		String[] res = level.split(" ");
 		scriptFile += res[1] + ".xml";
+		lvl = Integer.parseInt(res[1]);
 		
-		
-		String mapName = intent.getStringExtra("map");
+		mapName = intent.getStringExtra("map");
 		if(mapName.equals("Earth")){
 			map = new Earth();
 			EditorGraphicsView.mapDrawable = R.drawable.earth;
@@ -183,7 +185,7 @@ public class EditorActivity extends Activity{
 						osw.write(action);
 					
 					first = name;
-					String info = "<enemy id=\"" + name + "\"> <life>35</life>	<image>" + name + "</image>";
+					String info = "<enemy id=\"" + name + "\" map=\"" + mapName + "\"> <life>35</life>	<image>" + name + "</image>";
 					osw.write(info);
 				}
 				

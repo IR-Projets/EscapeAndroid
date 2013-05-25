@@ -51,6 +51,7 @@ public class LoaderXml{
 	private enum EnemyType{Enemy, Boss};
 
 	private class EnemyProperties{
+		public String map;
 		public String name;
 		public Bitmap image=null;
 		public int life=-1;
@@ -93,8 +94,10 @@ public class LoaderXml{
 				}
 				else{
 					enemyPropertiesTmp = new EnemyProperties();
-					if(qName.equals("enemy"))
+					if(qName.equals("enemy")){
 						enemyPropertiesTmp.enemyType=EnemyType.Enemy;
+						enemyPropertiesTmp.map = attributes.getValue("map");
+					}
 					else
 						enemyPropertiesTmp.enemyType=EnemyType.Boss;
 				}
@@ -219,7 +222,6 @@ public class LoaderXml{
 
 		@Override
 		public void endElement(String uri, String localName, String qName) throws SAXException{
-
 			if (qName.equals("enemy") || qName.equals("boss")){
 				if (enemyPropertiesTmp == null || enemyPropertiesTmp.life==-1 || enemyPropertiesTmp.image==null || enemyPropertiesTmp.actions==null || enemyPropertiesTmp.appearListTmp == null ){
 					throw new SAXException("Enemy, life, image, actions or appear fields are not correctly set ");
@@ -398,7 +400,7 @@ public class LoaderXml{
 					isBoss=true;
 				else
 					isBoss=false;
-				listEnemies.add(new EnemyDef(enemyProperties.name, enemyProperties.image,  enemyBehavior, (int)appearTime.position.x, (int)appearTime.position.y, enemyProperties.life, appearTime.time, isBoss));
+				listEnemies.add(new EnemyDef(enemyProperties.name, enemyProperties.map, enemyProperties.image,  enemyBehavior, (int)appearTime.position.x, (int)appearTime.position.y, enemyProperties.life, appearTime.time, isBoss));
 			}
 		}
 		return listEnemies;

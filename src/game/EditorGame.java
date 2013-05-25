@@ -4,6 +4,7 @@ import hud.Button;
 import hud.Button.ButtonType;
 
 import java.io.IOException;
+import java.util.List;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,6 +12,7 @@ import android.graphics.Paint;
 import android.view.MotionEvent;
 
 import listeners.EnvironnementListener;
+import maps.Map;
 import factories.EnvironnementFactory;
 import factories.EnvironnementFactory.Level;
 import story.*;
@@ -41,12 +43,12 @@ import story.*;
  *
  */
 
-public class Game implements EnvironnementListener{
+public class EditorGame extends Game implements EnvironnementListener {
 
 	/**
 	 * The environment of the game.
 	 */
-	private Environnement environnement;
+	private List<Environnement> environnements;
 
 	/**
 	 * For the double buffered method
@@ -90,54 +92,24 @@ public class Game implements EnvironnementListener{
 	public boolean finished;
 
 	/**
-	 * Our little story.
-	 */
-	private Story story;
-	
-	/**
 	 * The current level of the game.
 	 */
-	private Level level;
+	private List<Map> levels;
 	
 	/**
 	 * The pause Button
 	 */
 	private Button pauseButton;
 
-	/**
-	 * Initialise our game.
-	 * @throws Exception 
-	 */
-	public Game() throws Exception{		
-		this.level = Level.Jupiter;		
-		environnement = EnvironnementFactory.factory(level);
-		environnement.addListener(this);
-		//offscreen = new BufferedImage(Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-		//offscreen = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDefaultConfiguration().createCompatibleImage(Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT, Transparency.OPAQUE);
-		//bufferGraphics = offscreen.createGraphics();
-		story = new Story();
-		story.loadStory1();
-		paused=false;
-		finished=false;
-		next_game_tick = -1;
-		
-		pauseButton=new Button(ButtonType.PAUSE, Variables.SCREEN_WIDTH/2-32, 10){
-			@Override
-			public void pressed() {
-				pause();
-			}			
-		};
-	}
 	
 	/**
 	 * FOR EDITOR ONLY
 	 * @throws IOException
 	 */
-	public Game(Environnement env) throws IOException{	
-		this.level = Level.Earth; //Comme c'est le dernier nivo (normalement) on gagne...
-		environnement = env;
-		environnement.addListener(this);
-		story = null;
+	public EditorGame(List<Environnement> env, List<Map> levels) throws Exception{	
+		this.levels = levels;
+		environnements = env;
+		environnements.get(0).addListener(this);
 		paused=false;
 		finished=false;
 		next_game_tick = -1;
@@ -154,30 +126,19 @@ public class Game implements EnvironnementListener{
 	public void stateChanged(GameState state) {
 		switch(state){
 		case Loose:
-			if(story!=null)
-				story.loadStory_Loose();
 			finished=true;
-			environnement.removeListener(this);
+			environnements.get(0).removeListener(this);
 			break;
 		case Win:
-			switch(level){
-			case Jupiter:
-				story.loadStory_WinJupiter();
-				level = Level.Moon;
-				break;
-			case Moon:
-				story.loadStory_WinMoon();
-				level = Level.Earth;
-				break;
-			case Earth:
-				finished=true;
-				story.loadStory_WinEarth();
-				break;
-			}	
-			environnement.removeListener(this);
+			if(!levels.isEmpty()){
+				levels.remove(0);
+				environnements.remove(0);
+			}
+			else
+				finished = true;
+			environnements.get(0).removeListener(this);
 			try{
-				environnement = EnvironnementFactory.factory(level);
-				environnement.addListener(this);
+				environnements.get(0).addListener(this);
 			}catch(Exception e){
 				exc = e;
 			}
@@ -194,14 +155,7 @@ public class Game implements EnvironnementListener{
 		if(exc != null)
 			throw exc;
 		
-		//bufferGraphics.clearRect(0,0,Variables.SCREEN_WIDTH, Variables.SCREEN_HEIGHT); 
-		//bufferGraphics.setBackground(new Color(0));			
-		if(story != null && story.isLoaded()){
-			story.render(canvas);
-			next_game_tick=-1;
-		}
-		else if(finished){
-			//return;
+		if(finished){
 			System.exit(0);
 		}
 		else{
@@ -212,12 +166,12 @@ public class Game implements EnvironnementListener{
 				int loops = 0;
 				long currentTime = System.currentTimeMillis();
 				while(currentTime > next_game_tick && loops < Variables.MAX_FRAMESKIP) {
-					environnement.compute();
+					environnements.get(0).compute();
 					next_game_tick += Variables.SKIP_TICKS;
 					loops++;
 				}
 			}
-			environnement.render(canvas);
+			environnements.get(0).render(canvas);
 			pauseButton.render(canvas);
 		}
 
@@ -265,11 +219,7 @@ public class Game implements EnvironnementListener{
 	 * @param event - the MotionEvent, to launch the environment or the story with the event
 	 */
 	public void event(MotionEvent event) {
-		if(story!=null && story.isLoaded())
-			story.event(event);
-		else{
-			environnement.event(event);
-			pauseButton.event(event);
-		}
+		environnements.get(0).event(event);
+		pauseButton.event(event);
 	}
 }
