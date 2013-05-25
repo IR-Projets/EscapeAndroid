@@ -5,6 +5,7 @@ import org.jbox2d.common.Vec2;
 import com.example.escapeandroid.R;
 
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 
 import effects.Effects;
 import effects.Explosion;
@@ -12,6 +13,8 @@ import entities.CollisionGroup;
 import entities.Entities;
 import entities.Entity;
 import entities.weapons.Bonus;
+import entities.weapons.ShiboleetExtended;
+import entities.weapons.Weapon;
 import entities.weapons.WeaponItem;
 import entities.weapons.WeaponItems;
 import factories.WeaponFactory.WeaponType;
@@ -456,4 +459,26 @@ public class Player extends Ship {
 			loadWeapon(weaponItems.getCurrentWeaponItem().getWeaponType(), true);
 	}
 
+	public void weaponFollowPlayer(Weapon weapon){
+		Vec2 posPlayer = getScreenPostion();
+		
+		float x = posPlayer.x + getImage().getWidth()/4;
+		float y = posPlayer.y - weapon.getImage().getHeight();
+		weapon.setPosition(x, y);
+		
+	}
+	
+	@Override
+	public void render(Canvas canvas) {
+		super.render(canvas);
+		if(weapon != null)
+			weaponFollowPlayer(weapon);
+		if(weapon instanceof ShiboleetExtended){
+			for(int i=0; i< ((ShiboleetExtended) weapon).child.length; i++)
+				weaponFollowPlayer(((ShiboleetExtended) weapon).child[i]);
+		}
+	}
+
+	
+	
 }

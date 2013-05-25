@@ -3,12 +3,10 @@ package gestures;
 import entities.ships.Player;
 import entities.ships.enemies.Action.ActionType;
 import game.Variables;
-import gestures.filters.ArrowMovement;
-import gestures.filters.Backoff;
-import gestures.filters.Drift;
 import gestures.filters.Filter;
 import gestures.filters.Filters;
 import gestures.filters.Looping;
+import gestures.filters.Move;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,10 +76,8 @@ public class Gesture {
 	 */
 	public List <Filter> initFilters(){
 		List<Filter> filtersList = new ArrayList<Filter>();
-		filtersList.add(new Backoff());
-		filtersList.add(new Drift());
 		filtersList.add(new Looping());
-		filtersList.add(new ArrowMovement());
+		filtersList.add(new Move());
 		return filtersList;
 	}
 
@@ -120,8 +116,10 @@ public class Gesture {
 		case MotionEvent.ACTION_UP : // End of the gesture
 			if(actionType == ActionType.MOVE){//the player want to move, so we check if he has make a good gesture, and apply the movement
 				for(Filter filter : filters)
-					if(traceStack.check(filter))
+					if(traceStack.check(filter)){
 						filter.apply(player);
+						break;
+					}
 			}
 			else if (actionType == ActionType.SHOOT){
 				shootWeapon();
@@ -130,10 +128,15 @@ public class Gesture {
 			break;
 
 		case MotionEvent.ACTION_DOWN : // Begin of the gesture
-			if(player.isOnSprite(new Vec2(event.getX(), event.getY())) && !player.getWeapons().isEmpty()){//the player want to shoot, so we load the weapon.
-				player.getWeapons().removeCurrentItem();
-				player.loadWeapon();
-				actionType = ActionType.SHOOT;
+			if(player.isOnSprite(new Vec2(event.getX(), event.getY()))){//the player want to shoot, so we load the weapon.
+				if(actionType != ActionType.SHOOT ){
+					actionType = ActionType.SHOOT;
+				}
+				else if(!player.getWeapons().isEmpty()){
+					player.getWeapons().removeCurrentItem();
+					player.loadWeapon();
+					actionType = ActionType.LOAD;
+				}
 			}
 			else
 				actionType = ActionType.MOVE;

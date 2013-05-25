@@ -3,7 +3,7 @@ package entities.weapons;
 import org.jbox2d.common.Vec2;
 
 import android.graphics.Bitmap;
-
+import android.util.Log;
 import effects.Effects;
 import effects.Explosion;
 import entities.Entities;
@@ -142,4 +142,14 @@ public abstract class Weapon extends Entity{
 		isLaunch = true;
 	}
 
+	public void setPosition(float x, float y) {
+		Vec2 posWeapon = getScreenPostion();
+		
+		float resX = x-posWeapon.x;
+		float resY = y-posWeapon.y;
+		
+		setVelocity(resX, -resY);
+	}
+
+	
 }

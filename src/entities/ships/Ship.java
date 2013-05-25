@@ -50,7 +50,7 @@ public abstract class Ship extends Entity{
 	/**
 	 * The weapon of the player.
 	 */
-	private Weapon weapon;
+	public Weapon weapon;
 	
 	/**
 	 * The weaponFactory used for load weapon.
@@ -138,16 +138,7 @@ public abstract class Ship extends Entity{
 		getEntities().removeEntitie(this);
 	}
 
-	/**
-	 * Launch the move of a ship.
-	 * @param angle - the angle to move
-	 * @param velocity - the velocity of the movement
-	 */
-	public void move(double angle, int velocity){
-		int vitX = (int) (Math.cos(Math.toRadians(angle))*velocity);
-		int vitY = (int) (Math.sin(Math.toRadians(angle))*velocity);
-		setVelocity(vitX, vitY);
-	}
+
 
 
 }

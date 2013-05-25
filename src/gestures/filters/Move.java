@@ -31,33 +31,30 @@ import game.Variables;
  */
 
 
-public class Backoff implements Filter {
+public class Move implements Filter {
 	
-	/**
-	 * Check if the angle of the Right is correct for backoff
-	 * @param angle
-	 * @return true if the angle is correct
-	 */
-	private boolean checkAngle(double angle){
-		if((angle >= 270-FILTER_BORNES && angle <= 270+FILTER_BORNES ))
-			return true;
-		return false;
-	}
+	double angle = 0;
+	double vec_x = 0;
+	double vec_y = 0;
+	
 	
 	@Override
 	public boolean check(List<Vec2> trace){
-		if(!trace.isEmpty()){
-			double angle = Filters.getAngle(trace);
-			if(Filters.isAffine(trace) && checkAngle(angle))
-				return true;
-			return false;
-		}
-		return false;
+		angle = Filters.getAngle(trace);
+		if(trace.size() < 2)
+			return true;
+		Vec2 beg = trace.get(0);
+		Vec2 end = trace.get(trace.size()-1);
+		vec_x = Math.abs(end.x - beg.x);
+		vec_y = Math.abs(end.y - beg.y);
+		return true;
 	}
 
 	@Override
 	public void apply(Player ship) {
-		ship.setVelocity(0, -Variables.SHIP_VELOCITY);
+		
+		float norm = (float) Math.sqrt(vec_x*vec_x + vec_y*vec_y);
+		ship.move(angle, (int)norm);
 	}
 	
 }

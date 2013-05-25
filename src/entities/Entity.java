@@ -141,6 +141,17 @@ public abstract class Entity implements CollisionListener{
 	public void setVelocity(float speedX, float speedY){
 		body.setLinearVelocity(new Vec2(speedX, speedY));
 	}
+	
+	/**
+	 * Launch the move of a ship.
+	 * @param angle - the angle to move
+	 * @param velocity - the velocity of the movement
+	 */
+	public void move(double angle, int velocity){
+		int vitX = (int) (Math.cos(Math.toRadians(angle))*velocity);
+		int vitY = (int) (Math.sin(Math.toRadians(angle))*velocity);
+		setVelocity(vitX, vitY);
+	}
 
 	/**
 	 * Set the linear damping of an entity.

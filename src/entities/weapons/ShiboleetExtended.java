@@ -32,7 +32,7 @@ public class ShiboleetExtended extends Shiboleet{
 	/**
 	 * A ShiboleetExtended has a tab of weapon, which represents all his child
 	 */
-	private final Weapon [] child;
+	public final Weapon [] child;
 	
 	/**
 	 * A ShiboleetExtended has a weaponFactory, for instantiate his child into our world which is entities

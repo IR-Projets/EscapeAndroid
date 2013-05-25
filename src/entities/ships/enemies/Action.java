@@ -31,6 +31,7 @@ public class Action {
 	 *
 	 */
 	public static enum ActionType{
+		LOAD,
 		SHOOT,
 		MOVE
 	};
