@@ -1,17 +1,14 @@
 package entities.weapons;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
-import android.view.View.MeasureSpec;
 import entities.Entities;
 import entities.Entity;
 import factories.WeaponFactory.WeaponType;
-import game.Variables;
 
 /**
  * This class represents a Bonus, which is created when an enemy died.

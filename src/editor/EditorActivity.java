@@ -1,27 +1,5 @@
 package editor;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import org.jbox2d.common.Vec2;
-import org.jbox2d.dynamics.World;
-
-import maps.Earth;
-import maps.EditorMap;
-import maps.Jupiter;
-import maps.Map;
-import maps.Moon;
-
-import com.example.escapeandroid.R;
-
 import entities.Entities;
 import entities.ships.Player;
 import entities.ships.enemies.EnemiesLoader;
@@ -32,27 +10,34 @@ import fr.umlv.android.GameGraphicsView;
 import game.Environnement;
 import game.Variables;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.util.Collections;
+import java.util.List;
+
+import maps.Earth;
+import maps.Jupiter;
+import maps.Map;
+import maps.Moon;
+
+import org.jbox2d.common.Vec2;
+import org.jbox2d.dynamics.World;
+
 import android.app.Activity;
 import android.content.ClipData;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.DragShadowBuilder;
-import android.view.View.MeasureSpec;
-import android.view.View.OnDragListener;
 import android.view.View.OnTouchListener;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import com.example.escapeandroid.R;
 
 public class EditorActivity extends Activity{
 	
@@ -191,16 +176,17 @@ public class EditorActivity extends Activity{
 				
 				//TODO: time d'apparition (en fonction de Y)
 				//NOTE: posY plus pris en compte...
-				int appearTime = (int) (EditorGraphicsView.map.getHeight() - enemy.posY )/25;//(int)(EditorGraphicsView.map.getHeight() - enemy.posY - Variables.SCREEN_HEIGHT )/15;
-
+				int appearTime = (int) (EditorGraphicsView.map.getHeight() - enemy.posY )/30;//(int)(EditorGraphicsView.map.getHeight() - enemy.posY - Variables.SCREEN_HEIGHT )/15;
+				
 				if(appearTime<=0)
-					appearTime = Math.abs(appearTime);
+					appearTime = 1;
 				String apparition = " <appear time=\"" + appearTime + "\"> <posX>" + (int)enemy.posX + "</posX> <posY>" + (int)enemy.posY + "</posY> </appear>";
 				osw.write(apparition);
 			}				
 			osw.write(action);
 			
 			int appearTime = (int)(EditorGraphicsView.map.getHeight() - Variables.SCREEN_HEIGHT )/15;
+
 			String boss = "<boss> <life>400</life> <image>boss</image>	<appear time=\"" + appearTime + "\"> <posX>150</posX>	<posY>950</posY></appear><actions repeattime=\"10\">	<move beg=\"2\" end=\"3\"> <angle>-90</angle> <velocity>70</velocity></move><move beg=\"4\" end=\"5\">	<angle>0</angle><velocity>50</velocity> </move> <move beg=\"7\" end=\"8\">	<angle>90</angle> <velocity>70</velocity> </move> <move beg=\"9\" end=\"10\"> <angle>180</angle> <velocity>50</velocity> </move> <fire beg=\"4\" end=\"6\"> <name>ShiboleetExtended</name>	<angle>270</angle> <velocity>250</velocity>	</fire>	</actions></boss></enemies>";
 			osw.write(boss);
 			
@@ -217,7 +203,7 @@ public class EditorActivity extends Activity{
 		}
 	}
 	
-	
+	/*
 	private String readTest() throws IOException{
 		FileInputStream fis = getBaseContext().openFileInput(scriptFile);			  
 		int content;
@@ -226,7 +212,7 @@ public class EditorActivity extends Activity{
 			text += (char) content;
 		}
 		return text;
-	}
+	}*/
 	
 	
 	/*

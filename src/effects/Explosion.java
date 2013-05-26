@@ -1,12 +1,10 @@
 package effects;
 
-import com.example.escapeandroid.R;
-
-import fr.umlv.android.MainActivity;
 import game.Ressources;
-
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+
+import com.example.escapeandroid.R;
 
 /**
  * The Explosion effects implements the class Effects, and do the explosion effect.

@@ -7,10 +7,12 @@ import hud.Button.ButtonType;
 
 import java.util.LinkedList;
 import java.util.List;
-import android.graphics.*;
-import android.graphics.drawable.*;
-import com.example.escapeandroid.*;
-import android.view.*;
+
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.view.MotionEvent;
+
+import com.example.escapeandroid.R;
 
 public class Story {
 

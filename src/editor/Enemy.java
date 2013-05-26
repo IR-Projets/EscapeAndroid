@@ -1,12 +1,11 @@
 package editor;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.view.View;
 
-public class Enemy implements Comparable{
+public class Enemy implements Comparable<Object>{
 	String name;
 	View view;
 	Bitmap bitmap;

@@ -1,5 +1,15 @@
 package editor;
 
+import entities.Entities;
+import entities.ships.Player;
+import entities.ships.enemies.EnemiesLoader;
+import factories.ShipFactory;
+import fr.umlv.android.GameActivity;
+import fr.umlv.android.GameGraphicsView;
+import game.EditorGame;
+import game.Environnement;
+import game.Variables;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,28 +21,15 @@ import maps.Moon;
 import org.jbox2d.common.Vec2;
 import org.jbox2d.dynamics.World;
 
-import entities.Entities;
-import entities.ships.Player;
-import entities.ships.enemies.EnemiesLoader;
-import factories.ShipFactory;
-import fr.umlv.android.GameActivity;
-import fr.umlv.android.GameGraphicsView;
-import game.EditorGame;
-import game.Environnement;
-import game.Game;
-import game.Variables;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.escapeandroid.R;

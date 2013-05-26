@@ -1,24 +1,17 @@
 package fr.umlv.android;
 
-import java.io.IOException;
-
 import editor.EditorActivity;
-
 import game.Game;
 import game.Variables;
+
+import java.io.IOException;
+
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Toast;
 
 public class GameGraphicsView extends View {
 

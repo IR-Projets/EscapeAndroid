@@ -2,23 +2,19 @@ package editor;
 
 import java.net.URISyntaxException;
 
-import com.example.escapeandroid.R;
-import com.example.escapeandroid.R.layout;
-import com.example.escapeandroid.R.menu;
-
-import android.net.Uri;
-import android.os.Bundle;
-import android.provider.MediaStore.Files;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.util.Log;
+import android.net.Uri;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.escapeandroid.R;
 
 public class SelectFile extends Activity {
 
@@ -82,7 +78,7 @@ public class SelectFile extends Activity {
 		}
 	}
 	
-	@Override
+	/*@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case FILE_SELECT_CODE:
@@ -93,7 +89,7 @@ public class SelectFile extends Activity {
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);
-	}
+	}*/
 	
 	public static String getPath(Context context, Uri uri) throws URISyntaxException {
         if ("content".equalsIgnoreCase(uri.getScheme())) {

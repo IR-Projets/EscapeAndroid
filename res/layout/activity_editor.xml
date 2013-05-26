@@ -26,28 +26,29 @@
                 android:id="@+id/imageView1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="enemy1"
+                android:contentDescription="@string/enemy1"
+                
                 android:src="@drawable/enemy1" />
             
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="enemy2"
+                android:contentDescription="@string/enemy2"
                 android:src="@drawable/enemy2" />
             
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="enemy3"
+                android:contentDescription="@string/enemy3"
                 android:src="@drawable/enemy3" />
                         
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="enemy4"
+                android:contentDescription="@string/enemy4"
                 android:src="@drawable/enemy4" />
             
         </LinearLayout>

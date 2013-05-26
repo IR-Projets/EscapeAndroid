@@ -1,6 +1,5 @@
 package gestures;
 
-import game.Variables;
 import gestures.filters.Filter;
 
 import java.util.Iterator;

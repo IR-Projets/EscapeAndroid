@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import factories.WeaponFactory.WeaponType;
-import game.Variables;
 /**
  * This class represents an item, which contains the main function for initialize it and show it on a Graphics.
  * An item is represents by a quantity, an image and a kind of weapon, because all of our items are weapons.

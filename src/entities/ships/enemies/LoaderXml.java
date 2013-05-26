@@ -14,11 +14,9 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import android.graphics.Bitmap;
-
 import entities.ships.enemies.Action.ActionType;
 import fr.umlv.android.MainActivity;
 import game.Ressources;
-import game.Variables;
 
 /**
  * This class is used for load an XML files into an EnemyDef class.

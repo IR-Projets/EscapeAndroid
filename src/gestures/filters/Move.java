@@ -5,7 +5,6 @@ import java.util.List;
 import org.jbox2d.common.Vec2;
 
 import entities.ships.Player;
-import game.Variables;
 /**
  * The Backoff is a back movement, which accept a trace with gradient between 260 and 280 degrees
  * 

@@ -26,6 +26,10 @@
 	<string name="from_file">Or from a file (need a file selector)</string>
 	<string name="select_file">Select file</string>
     
+    <string name="enemy1">enemy1</string>
+    <string name="enemy2">enemy2</string>
+    <string name="enemy3">enemy3</string>
+    <string name="enemy4">enemy4</string>
     
     <string-array name="planets_array">
         <item>Earth</item>

@@ -5,15 +5,14 @@ import hud.Button.ButtonType;
 
 import java.io.IOException;
 
+import listeners.EnvironnementListener;
+import story.Story;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.view.MotionEvent;
-
-import listeners.EnvironnementListener;
 import factories.EnvironnementFactory;
 import factories.EnvironnementFactory.Level;
-import story.*;
 
 
 /**
@@ -240,6 +239,7 @@ public class Game implements EnvironnementListener{
 	 * Draw a frame per second into the graphics
 	 * @param graphics - the graphics to print on
 	 */
+	@SuppressWarnings("deprecation")
 	public void drawFPS(Canvas canvas){
 		loop++;
 		if(loop>fps_refreshRate){	//1er image: On recupere le temps

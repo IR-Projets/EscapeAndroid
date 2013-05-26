@@ -1,8 +1,9 @@
 package factories;
 
+import android.graphics.Bitmap;
+
 import com.example.escapeandroid.R;
 
-import android.graphics.Bitmap;
 import entities.Entities;
 import entities.weapons.Fireball;
 import entities.weapons.Missile;
@@ -11,7 +12,6 @@ import entities.weapons.ShiboleetExtended;
 import entities.weapons.Shuriken;
 import entities.weapons.Weapon;
 import game.Ressources;
-import game.Variables;
 
 /**
  * This class is a factory of weapon, and make all weapons of ships.

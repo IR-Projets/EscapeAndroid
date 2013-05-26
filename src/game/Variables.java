@@ -1,6 +1,5 @@
 package game;
 
-import android.content.res.Resources;
 import android.graphics.Color;
 
 
