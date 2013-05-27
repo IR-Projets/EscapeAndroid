@@ -22,7 +22,7 @@
     <string name="play">Play</string>
         
     <string name="existing_map">From existing map</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
 	<string name="from_file">Or from a file (need a file selector)</string>
 	<string name="select_file">Select file</string>
     

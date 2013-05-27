@@ -39,9 +39,9 @@ public class Move implements Filter {
 	
 	@Override
 	public boolean check(List<Vec2> trace){
-		angle = Filters.getAngle(trace);
 		if(trace.size() < 2)
 			return true;
+		angle = Filters.getAngle(trace);
 		Vec2 beg = trace.get(0);
 		Vec2 end = trace.get(trace.size()-1);
 		vec_x = Math.abs(end.x - beg.x);
